@@ -28,7 +28,7 @@
       "name": "Git 워크플로우 규칙",
       "description": "안전한 Git 스테이징, 커밋, 메시지 작성 규칙",
       "tags": ["git", "commit", "workflow"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/rules/git-workflow.md"
     },
@@ -343,6 +343,16 @@
       "path": "source/rules/work-strategy.md"
     },
     {
+      "id": "scope-judgment",
+      "type": "rule",
+      "name": "스코프 판단 기준",
+      "description": "작업 중 발견한 추가 문제를 지금 할지, 나중으로 미룰지 판단하는 기준",
+      "tags": ["scope", "decision", "todo", "focus"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/scope-judgment.md"
+    },
+    {
       "id": "incident-response",
       "type": "skill",
       "name": "장애 대응 절차",
@@ -371,6 +381,36 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/skills/operations/voc-handling.md"
+    },
+    {
+      "id": "commit-granularity",
+      "type": "rule",
+      "name": "커밋 분리 기준",
+      "description": "변경사항을 어떤 단위로 커밋할지 판단하는 기준",
+      "tags": ["git", "commit", "granularity"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/commit-granularity.md"
+    },
+    {
+      "id": "code-reading-order",
+      "type": "rule",
+      "name": "코드 읽는 순서",
+      "description": "프로젝트 구조를 파악하거나 특정 기능을 이해할 때 무엇부터 읽을지 가이드",
+      "tags": ["reading", "navigation", "understanding", "codebase"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/code-reading-order.md"
+    },
+    {
+      "id": "naming-conventions",
+      "type": "rule",
+      "name": "네이밍 컨벤션",
+      "description": "API 경로, DB 스키마, 파일명 등 프로젝트 구조적 네이밍 규칙",
+      "tags": ["naming", "convention", "api", "database", "structure"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/naming-conventions.md"
     }
   ]
 }

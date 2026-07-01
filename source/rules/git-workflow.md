@@ -4,9 +4,9 @@ type: rule
 name: Git 워크플로우 규칙
 description: 안전한 Git 스테이징, 커밋, 메시지 작성 규칙
 tags: [git, commit, workflow]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 커밋 분리 기준 참조 추가
 dependsOn: []
 compatibleWith: []
 ---
@@ -86,3 +86,12 @@ git commit -m "chore: update gradle wrapper to 8.5"
 - 50자 이내로 간결하게 작성
 - body가 필요한 경우 빈 줄로 분리 후 상세 설명
 - breaking change가 있으면 footer에 `BREAKING CHANGE:` 명시
+
+## 5. 커밋 분리
+
+상세 기준은 `commit-granularity` rule 참조.
+
+핵심 요약:
+- 하나의 커밋 = 하나의 논리적 변경
+- 기능 추가와 리팩토링을 같은 커밋에 섞지 않는다
+- 각 커밋은 단독으로 빌드 통과해야 한다
