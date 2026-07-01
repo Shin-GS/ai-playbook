@@ -331,6 +331,36 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/testing-strategy.md"
+    },
+    {
+      "id": "incident-response",
+      "type": "skill",
+      "name": "장애 대응 절차",
+      "description": "1인 빌더를 위한 서비스 장애 감지부터 복구, 사후 분석까지의 대응 절차",
+      "tags": ["operations", "incident", "response", "troubleshooting"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/skills/operations/incident-response.md"
+    },
+    {
+      "id": "backup-recovery",
+      "type": "skill",
+      "name": "백업/복구 전략",
+      "description": "1인 빌더를 위한 데이터 백업 주기, 복구 절차, 비용 효율적 구성 가이드",
+      "tags": ["operations", "backup", "recovery", "database"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/skills/operations/backup-recovery.md"
+    },
+    {
+      "id": "voc-handling",
+      "type": "skill",
+      "name": "사용자 문의 대응 (VOC)",
+      "description": "1인 빌더가 개발하면서 효율적으로 사용자 문의를 처리하는 분류/대응/자동화 가이드",
+      "tags": ["operations", "voc", "customer-support", "feedback"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/skills/operations/voc-handling.md"
     }
   ]
 }
