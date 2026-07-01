@@ -4,10 +4,10 @@ type: workflow
 name: 디자인 시스템 구축 워크플로우
 description: 프로젝트별 디자인 시스템(토큰→컴포넌트→페이지) 구축 순서와 규칙
 tags: [workflow, design, ui, ux, design-system]
-version: "1.2"
+version: "1.3"
 updatedAt: 2026-07-01
-changelog: 선행 조건(기획 문서 확인) 단계 추가
-dependsOn: [multi-perspective-review]
+changelog: dependsOn에 design-docs-system, project-docs-structure 추가
+dependsOn: [multi-perspective-review, design-docs-system, project-docs-structure]
 compatibleWith: [react, typescript]
 ---
 

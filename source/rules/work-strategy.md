@@ -4,10 +4,10 @@ type: rule
 name: 작업 도구 선택 전략
 description: 상황에 따라 서브에이전트, git worktree, context-gatherer 등 적절한 도구를 선택하는 판단 기준
 tags: [strategy, tools, subagents, worktree, context, decision]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
-dependsOn: [subagents-collaboration, parallel-work, context-efficiency]
+changelog: dependsOn에 verification-loop, multi-perspective-review 추가
+dependsOn: [subagents-collaboration, parallel-work, context-efficiency, verification-loop, multi-perspective-review]
 compatibleWith: []
 ---
 

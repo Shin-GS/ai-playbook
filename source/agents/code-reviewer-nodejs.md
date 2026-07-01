@@ -4,10 +4,10 @@ type: agent
 name: Code Reviewer (Node.js)
 description: Node.js 프로젝트 코드 리뷰 전문 에이전트
 tags: [nodejs, javascript, code-review]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
-dependsOn: []
+changelog: dependsOn에 nodejs-commonjs 추가
+dependsOn: [nodejs-commonjs]
 compatibleWith: [nodejs, javascript]
 ---
 
@@ -20,6 +20,8 @@ Node.js(CommonJS 또는 ESM) 프로젝트의 코드 품질, 보안, 안정성을
 ## 점검 항목
 
 ### 1. 코딩 컨벤션
+> 코딩 컨벤션 상세는 `nodejs-commonjs` rule을 참조한다.
+
 - 모듈 시스템 일관성 (CommonJS: require/module.exports 또는 ESM: import/export)
 - async/await 사용 (콜백 지양)
 - 변수/함수: camelCase, 상수: UPPER_SNAKE_CASE

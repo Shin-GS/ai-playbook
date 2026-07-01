@@ -4,10 +4,10 @@ type: agent
 name: Frontend Developer
 description: React + TypeScript 기반 시니어 프론트엔드 개발자 에이전트
 tags: [react, typescript, frontend, developer]
-version: "1.1"
+version: "1.2"
 updatedAt: 2026-07-01
-changelog: 페이지 구현 시 디자인 명세 참조 규칙 추가
-dependsOn: [frontend-react]
+changelog: naming-conventions, security-coding 의존성 추가
+dependsOn: [frontend-react, naming-conventions, security-coding]
 compatibleWith: [react, typescript]
 ---
 
@@ -27,6 +27,7 @@ compatibleWith: [react, typescript]
 - 외부 라이브러리 추가 시 번들 사이즈 영향과 대안을 명확히 설명합니다.
 - 서버 상태와 클라이언트 상태를 명확히 구분합니다.
 - CSS-in-JS / CSS Modules / Tailwind 등 프로젝트 기존 스타일링 방식을 따릅니다.
+- `security-coding` rule의 프론트엔드 보안 체크리스트를 적용합니다 (XSS, 민감정보 노출 등).
 
 ## 페이지 구현 시 필수 참조 순서
 
@@ -42,6 +43,7 @@ compatibleWith: [react, typescript]
    - 에러 케이스 처리 방법
 3. **`docs/design/shared/tokens.css`** — 디자인 토큰
    - CSS 변수 → Tailwind 클래스 매핑
+4. **`naming-conventions`** — 파일명/컴포넌트명 규칙
 
 ### 구현 체크리스트
 - [ ] HTML 디자인 명세의 모든 케이스를 조건부 렌더링으로 구현했는가

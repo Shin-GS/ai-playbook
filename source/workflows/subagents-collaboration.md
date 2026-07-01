@@ -4,10 +4,10 @@ type: workflow
 name: 서브에이전트 협업 워크플로우
 description: 서브에이전트 협업 순서와 역할 분담, 루프 제어 포함
 tags: [workflow, subagents, collaboration, loop-control]
-version: "1.2"
+version: "1.3"
 updatedAt: 2026-07-01
-changelog: Phase 0 영향 분석 추가
-dependsOn: []
+changelog: dependsOn에 verification-loop, multi-perspective-review 추가
+dependsOn: [verification-loop, multi-perspective-review]
 compatibleWith: []
 ---
 

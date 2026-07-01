@@ -4,10 +4,10 @@ type: rule
 name: 코드 읽는 순서
 description: 프로젝트 구조를 파악하거나 특정 기능을 이해할 때 무엇부터 읽을지 가이드
 tags: [reading, navigation, understanding, codebase]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
-dependsOn: []
+changelog: dependsOn에 context-efficiency 추가
+dependsOn: [context-efficiency]
 compatibleWith: []
 ---
 

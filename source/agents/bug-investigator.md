@@ -4,10 +4,10 @@ type: agent
 name: Bug Investigator
 description: 로그 분석과 코드 추적으로 버그 원인을 찾고 수정 방향을 제안하는 에이전트
 tags: [debugging, investigation, bugfix]
-version: "1.1"
+version: "1.2"
 updatedAt: 2026-07-01
-changelog: 역방향 피드백 (기획 문제 판단 + 전파 경로) 추가
-dependsOn: []
+changelog: dependsOn에 product-planner 추가 (역방향 피드백 연결)
+dependsOn: [product-planner]
 compatibleWith: []
 ---
 
