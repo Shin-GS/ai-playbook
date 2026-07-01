@@ -1,0 +1,21 @@
+name: Deploy MCP Server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ~/ai-playbook
+            git pull origin main
+            cd mcp-server
+            pm2 restart ai-playbook-server || pm2 start src/index.js --name ai-playbook-server
+            pm2 save
