@@ -258,7 +258,7 @@
       "name": "디자인 시스템 구축 워크플로우",
       "description": "프로젝트별 디자인 시스템(토큰→컴포넌트→페이지) 구축 순서와 규칙",
       "tags": ["workflow", "design", "ui", "ux", "design-system"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/design-system.md"
     },
@@ -278,7 +278,7 @@
       "name": "UI Designer",
       "description": "HTML/CSS 기반 디자인 명세 구현 및 디자인 시스템 관리 에이전트",
       "tags": ["design", "ui", "ux", "html", "css", "design-system"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/ui-designer.md"
     },
@@ -291,6 +291,16 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/marketing-strategist.md"
+    },
+    {
+      "id": "design-docs-system",
+      "type": "skill",
+      "name": "디자인 문서 시스템",
+      "description": "빌드 도구 없이 HTML/CSS로 관리하는 디자인 문서 시스템 구조와 컨벤션",
+      "tags": ["design", "documentation", "html", "css", "design-system"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/skills/design/design-docs-system.md"
     }
   ]
 }

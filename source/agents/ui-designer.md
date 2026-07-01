@@ -4,10 +4,10 @@ type: agent
 name: UI Designer
 description: HTML/CSS 기반 디자인 명세 구현 및 디자인 시스템 관리 에이전트
 tags: [design, ui, ux, html, css, design-system]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
-dependsOn: [design-system]
+changelog: dependsOn에 design-docs-system 추가
+dependsOn: [design-system, design-docs-system]
 compatibleWith: [react, typescript]
 ---
 
@@ -29,6 +29,7 @@ compatibleWith: [react, typescript]
 3. 해당 화면의 케이스 정의 (.cases.md)
 4. 기존 화면 HTML 2~3개 — 톤앤매너 파악용 (새 화면 작업 시)
 5. 컴포넌트 카탈로그 (system.html) — 사용 가능한 컴포넌트 확인
+6. 디자인 문서 시스템 가이드 (design-docs-system skill) — 구조, manifest 스키마, 뷰포트 설정
 
 ## 작업 대상 파일 구조
 

@@ -4,9 +4,9 @@ type: workflow
 name: 디자인 시스템 구축 워크플로우
 description: 프로젝트별 디자인 시스템(토큰→컴포넌트→페이지) 구축 순서와 규칙
 tags: [workflow, design, ui, ux, design-system]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: Step 0 (docs/design/ 초기 구조 세팅) 추가
 dependsOn: [multi-perspective-review]
 compatibleWith: [react, typescript]
 ---
@@ -22,6 +22,20 @@ compatibleWith: [react, typescript]
 > ⚠️ tokens.css + components.css + 시스템 HTML이 없는 상태에서 페이지 구현을 시작하면 안 된다.
 
 ## Steps
+
+### Step 0: docs/design/ 초기 구조 세팅
+- **done-when**: docs/design/ 디렉토리에 index.html, shared/ (design-manifest.js, tokens.css, base.css, components.css), README.md가 존재
+- **fail-action**: 존재하지 않으면 `design-docs-system` skill을 참조하여 구조 생성
+
+절차:
+1. `docs/design/shared/design-manifest.js` 생성 — 뷰포트 설정 (프로젝트 타겟에 맞게)
+2. `docs/design/shared/tokens.css` 생성 — 기본 디자인 토큰
+3. `docs/design/shared/base.css` 생성 — 리셋 + case-switcher 로직
+4. `docs/design/shared/components.css` 생성 — 빈 파일 (점진 추가)
+5. `docs/design/index.html` 생성 — manifest 기반 화면 목록 렌더링
+6. `docs/design/README.md` 생성 — 화면 현황 문서
+
+> 이 단계가 완료되어야 페이지별 디자인 작업으로 넘어갈 수 있다.
 
 ### Step 1: 디자인 토큰 정의 (tokens.css)
 - **done-when**: 색상, 간격, 폰트, radius, 그림자 등 기본 토큰 정의 완료
