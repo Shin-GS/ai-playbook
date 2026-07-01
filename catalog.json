@@ -74,10 +74,10 @@
       "name": "서브에이전트 협업 워크플로우",
       "description": "서브에이전트 협업 순서와 역할 분담, 루프 제어 포함",
       "tags": ["workflow", "subagents", "collaboration", "loop-control"],
-      "version": "1.4",
+      "version": "1.5",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/subagents-collaboration.md",
-      "changelog": "초기 버전"
+      "changelog": "기획/디자인 리뷰 단계 추가"
     },
     {
       "id": "context-efficiency",
@@ -143,6 +143,17 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/agents/frontend-developer.md",
+      "changelog": "초기 버전"
+    },
+    {
+      "id": "frontend-code-reviewer",
+      "type": "agent",
+      "name": "Frontend Code Reviewer",
+      "description": "React + TypeScript 프론트엔드 코드 리뷰 전문 에이전트",
+      "tags": ["react", "typescript", "code-review", "frontend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/frontend-code-reviewer.md",
       "changelog": "초기 버전"
     },
     {
@@ -322,6 +333,39 @@
       "changelog": "초기 버전"
     },
     {
+      "id": "frontend-code-reviewer",
+      "type": "agent",
+      "name": "Frontend Code Reviewer",
+      "description": "React + TypeScript 프론트엔드 코드 리뷰 전문 에이전트",
+      "tags": ["react", "typescript", "code-review", "frontend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/frontend-code-reviewer.md",
+      "changelog": "초기 버전"
+    },
+    {
+      "id": "planning-reviewer",
+      "type": "agent",
+      "name": "Planning Reviewer",
+      "description": "기획 문서(cases.md, business-logic)의 완성도와 일관성을 검증하는 리뷰어",
+      "tags": ["planning", "review", "quality"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/planning-reviewer.md",
+      "changelog": "초기 버전"
+    },
+    {
+      "id": "design-reviewer",
+      "type": "agent",
+      "name": "Design Reviewer",
+      "description": "디자인 명세(HTML)의 접근성, 일관성, 완성도를 검증하는 리뷰어",
+      "tags": ["design", "review", "accessibility", "ui"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/design-reviewer.md",
+      "changelog": "초기 버전"
+    },
+    {
       "id": "design-docs-system",
       "type": "skill",
       "name": "디자인 문서 시스템",
@@ -472,7 +516,7 @@
     },
     "react-frontend": {
       "description": "React/TypeScript 프론트엔드 개발 세트",
-      "assets": ["frontend-react", "naming-conventions", "security-coding", "frontend-developer"]
+      "assets": ["frontend-react", "naming-conventions", "security-coding", "frontend-developer", "frontend-code-reviewer"]
     },
     "nodejs-backend": {
       "description": "Node.js 백엔드 개발 세트",

@@ -4,9 +4,9 @@ type: workflow
 name: 서브에이전트 협업 워크플로우
 description: 서브에이전트 협업 순서와 역할 분담, 루프 제어 포함
 tags: [workflow, subagents, collaboration, loop-control]
-version: "1.4"
+version: "1.5"
 updatedAt: 2026-07-01
-changelog: 문서 동기화 체크 섹션 추가
+changelog: 기획/디자인 리뷰 단계 추가
 dependsOn: [verification-loop, multi-perspective-review]
 compatibleWith: []
 ---
@@ -106,6 +106,20 @@ main 에이전트는 분석/조율/결과 보고만 담당한다.
 3. 필요 시 비즈니스 로직/용어 문서 업데이트
 4. 다음 단계 전달 사항 명시
 
+### Phase 1.5: 기획 리뷰 (선택)
+
+- **done-when**: 기획 리뷰 피드백 처리 완료
+- **fail-action**: 핵심 누락 발견 시 Phase 1로 돌아가 수정
+
+적용 기준 (work-strategy 참조):
+- 새 화면/기능 추가 시 → 적용
+- 기존 케이스 1~2줄 수정 → 스킵
+
+절차:
+1. `planning-reviewer` 호출 (cases.md + business-logic 전달)
+2. 피드백 확인 → 빠진 케이스/모순 있으면 product-planner에게 수정 지시
+3. 1회 리뷰 원칙 (무한 루프 방지)
+
 ### Phase 2: 디자인
 
 - **done-when**: 디자인 명세 생성 완료, 토큰 변경 시 영향 범위 보고 완료
@@ -115,6 +129,20 @@ main 에이전트는 분석/조율/결과 보고만 담당한다.
 1. 디자인 에이전트 호출 (기획 산출물 전달)
 2. 케이스 기반 디자인 명세 구현
 3. 토큰/컴포넌트 변경 시 영향 범위 + FE 동기화 필요 여부 보고
+
+### Phase 2.5: 디자인 리뷰 (선택)
+
+- **done-when**: 디자인 리뷰 피드백 처리 완료
+- **fail-action**: 접근성/일관성 이슈 발견 시 ui-designer에게 수정 지시
+
+적용 기준:
+- 새 화면 추가 시 → 적용
+- 기존 HTML 소규모 수정 → 스킵
+
+절차:
+1. `design-reviewer` 호출 (HTML + cases.md + tokens.css 전달)
+2. 피드백 확인 → 이슈 있으면 ui-designer에게 수정 지시
+3. 1회 리뷰 원칙
 
 ### Phase 3: FE/BE 구현
 
