@@ -1,4 +1,4 @@
-name: Deploy MCP Server
+name: Deploy
 
 on:
   workflow_dispatch:
@@ -10,7 +10,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Clean and deploy
+      # VPS 배포
+      - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -21,7 +22,7 @@ jobs:
           rm: true
           overwrite: true
 
-      - name: Restart server
+      - name: Restart MCP server
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -36,3 +37,15 @@ jobs:
             sleep 2
             curl -f http://localhost:3100/health || echo "Health check failed"
 
+      # npm publish (mcp-client)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish mcp-client
+        working-directory: mcp-client
+        run: npm publish --access public || echo "Already published (same version)"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
