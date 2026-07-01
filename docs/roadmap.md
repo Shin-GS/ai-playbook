@@ -18,7 +18,6 @@
 - GitHub Actions로 push 시 자동 동기화 (git pull)
 - 도구: list_catalog, load_asset, suggest_assets, get_preset, get_group
 - 인메모리 캐시 (catalog.json 기반)
-- source/ 파일을 직접 서빙 (dist/ 레이어 불필요)
 
 ### 동적 자산 관리
 - 세션 시작 시: applied 자산 updatedAt 비교 → 갱신 제안
@@ -29,7 +28,6 @@
 - 그룹 단위 적용 (java-backend, react-frontend 등)
 
 ### 도구 확장
-- dist/ 폴더 삭제 완료 (MCP 서버가 source/ 직접 서빙)
 - AI 도구가 source/를 읽고 자기 형식으로 변환하는 방식으로 전환
 - Claude Code: CLAUDE.md 변환 지원
 - Cursor: .cursorrules 변환 지원

@@ -11,4 +11,4 @@ inclusion: always
 #[[file:source/rules/dev-language.md]]
 
 ## 변환 절차
-#[[file:source/workflows/dist-conversion-kiro.md]]
+#[[file:source/workflows/kiro-conversion.md]]

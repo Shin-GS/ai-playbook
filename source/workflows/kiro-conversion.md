@@ -1,12 +1,12 @@
 ---
-id: dist-conversion-kiro
+id: kiro-conversion
 type: workflow
 name: Kiro 자산 변환 규칙
 description: source/ 자산을 Kiro 네이티브 형식(.kiro/)으로 변환하여 프로젝트에 저장하는 규칙
 tags: [workflow, conversion, kiro]
-version: "2.0"
+version: "1.0"
 updatedAt: 2026-07-01
-changelog: dist/ 제거 후 MCP 기반 직접 변환 방식으로 전면 개정
+changelog: 초기 버전
 dependsOn: []
 compatibleWith: []
 ---
