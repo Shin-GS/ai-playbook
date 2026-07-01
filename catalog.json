@@ -298,7 +298,7 @@
       "name": "디자인 문서 시스템",
       "description": "빌드 도구 없이 HTML/CSS로 관리하는 디자인 문서 시스템 구조와 컨벤션",
       "tags": ["design", "documentation", "html", "css", "design-system"],
-      "version": "1.0",
+      "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/design/design-docs-system.md"
     },
@@ -308,7 +308,7 @@
       "name": "프로젝트 기획 문서 구조",
       "description": "프로젝트 시작 시 갖춰야 할 기획 문서 4종의 구조와 권장 내용",
       "tags": ["planning", "documentation", "project-setup"],
-      "version": "1.0",
+      "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/planning/project-docs-structure.md"
     },
@@ -318,7 +318,7 @@
       "name": "테스트 문서 시스템",
       "description": "빌드 도구 없이 HTML/JS로 관리하는 수동 테스트 체크리스트 시스템 구조와 컨벤션",
       "tags": ["qa", "testing", "documentation", "checklist"],
-      "version": "1.0",
+      "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/qa/test-docs-system.md"
     }

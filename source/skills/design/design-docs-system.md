@@ -4,9 +4,9 @@ type: skill
 name: 디자인 문서 시스템
 description: 빌드 도구 없이 HTML/CSS로 관리하는 디자인 문서 시스템 구조와 컨벤션
 tags: [design, documentation, html, css, design-system]
-version: "1.0"
+version: "1.2"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 멀티 클라이언트 구조 섹션 추가
 dependsOn: [design-system]
 compatibleWith: [react, typescript]
 ---
@@ -312,3 +312,105 @@ html 작성 완료 후 아래를 확인:
 1. design-manifest.js에서 제거
 2. HTML + cases.md 삭제
 3. README.md 갱신
+
+
+---
+
+## 멀티 서버 프로젝트 (모노레포)
+
+프로젝트에 여러 클라이언트/서버가 있을 때 (예: miniapp + admin + web + backend) 카테고리로 분리한다.
+
+### 카테고리 분리 기준
+
+**클라이언트 유형별**로 분리:
+- `miniapp/` — 모바일 앱 화면
+- `admin/` — 어드민 대시보드 화면
+- `web/` — 공개 웹 페이지
+
+> 백엔드는 화면이 없으므로 docs/design/ 카테고리에 포함하지 않음.
+
+### 공통 vs 서버별 분리
+
+| 항목 | 위치 | 이유 |
+|------|------|------|
+| tokens.css | `shared/` (공통 1개) | 브랜드 색상, 간격 체계는 프로젝트 전체에 일관 |
+| components.css | `shared/` (공통 1개) | 동일 컴포넌트는 서버 간 재사용 |
+| base.css | `shared/` (공통 1개) | 리셋, case-switcher는 공통 |
+| 화면 HTML | `{category}/` (서버별) | 각 클라이언트마다 화면이 다름 |
+| cases.md | `{category}/` (서버별) | 화면 HTML과 1:1 매칭 |
+| 컴포넌트 카탈로그 | `shared/{category}-system.html` | 서버별 컴포넌트 세트가 다를 수 있음 |
+
+### design-manifest.js 예시
+
+```javascript
+window.__DESIGN_CONFIG__ = {
+  viewports: [...],
+  categoryDefaults: {
+    miniapp: "Mobile M",    // 모바일 앱
+    admin: "Desktop",       // 데스크톱 전용
+    web: "Desktop"          // 반응형 웹
+  }
+};
+
+window.__DESIGN_MANIFEST__ = {
+  miniapp: { label: "Mini App", items: [...] },
+  admin: { label: "Admin Dashboard", items: [...] },
+  web: { label: "Public Web", items: [...] },
+  shared: { label: "Design System", items: [...] }
+};
+```
+
+### 새 서버 추가 시
+1. manifest에 카테고리 추가
+2. `docs/design/{category}/` 디렉토리 생성
+3. `categoryDefaults`에 기본 뷰포트 설정
+4. 필요하면 `shared/{category}-system.html` 컴포넌트 카탈로그 생성
+
+
+---
+
+## 멀티 클라이언트 구조
+
+프로젝트에 클라이언트가 여러 개 있으면(예: 모바일 앱 + 어드민 + 공개 웹) 카테고리로 분리한다.
+
+### 원칙
+
+- **카테고리 이름은 프로젝트에 맞게 자유 결정** — 고정된 이름(miniapp, admin 등)은 없음
+- **분리 기준**: 대상 사용자/플랫폼이 다르면 카테고리를 나눈다
+- **같은 화면이라도 클라이언트별로 각각 작성한다** — 공유/참조 패턴 사용하지 않음 (클라이언트별 분기 필요 시 꼬임 방지)
+
+### 공통 vs 클라이언트별 분리
+
+| 항목 | 공통 (shared/) | 클라이언트별 ({category}/) |
+|------|--------------|--------------------------|
+| tokens.css | ✅ 디자인 일관성 | 필요 시 클라이언트별 override 가능 |
+| components.css | ✅ 기본 컴포넌트 | 클라이언트별 전용 컴포넌트는 HTML <style>에 |
+| base.css | ✅ | |
+| system.html (카탈로그) | 클라이언트별 각각 | ✅ |
+| 화면 cases.md | | ✅ |
+| 화면 HTML | | ✅ |
+| design-manifest.js | ✅ (카테고리로 구분) | |
+
+### 뷰포트 기본값도 카테고리별
+
+```javascript
+categoryDefaults: {
+  // 프로젝트에 맞게 설정
+  // "mobile-app": "Mobile M",
+  // "admin-panel": "Desktop",
+  // "landing": "Desktop"
+}
+```
+
+### 단일 클라이언트 프로젝트
+
+클라이언트가 1개뿐이면 카테고리 분리 없이 바로:
+```
+docs/design/
+├── shared/
+├── home.html
+├── home.cases.md
+├── settings.html
+├── settings.cases.md
+└── ...
+```

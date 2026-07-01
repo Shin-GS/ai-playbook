@@ -4,9 +4,9 @@ type: skill
 name: 테스트 문서 시스템
 description: 빌드 도구 없이 HTML/JS로 관리하는 수동 테스트 체크리스트 시스템 구조와 컨벤션
 tags: [qa, testing, documentation, checklist]
-version: "1.0"
+version: "1.2"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 멀티 클라이언트 구조 섹션 추가
 dependsOn: []
 compatibleWith: []
 ---
@@ -236,3 +236,105 @@ window.__TEST_DATA__ = {
 6. `docs/test/README.md` 생성
 
 > qa-tester 에이전트가 이 구조를 인지하고 기능 추가/변경 시 자동으로 테스트를 생성/갱신한다.
+
+
+---
+
+## 멀티 서버 프로젝트 (모노레포)
+
+프로젝트에 여러 클라이언트/서버가 있을 때 카테고리로 분리한다.
+
+### 카테고리 분리 기준
+
+디자인 문서와 동일하게 **클라이언트 유형별** 분리:
+- `miniapp/` — 모바일 앱 기능 테스트
+- `admin/` — 어드민 기능 테스트
+- `web/` — 공개 웹 기능 테스트
+
+### 공통 vs 서버별 분리
+
+| 항목 | 위치 | 이유 |
+|------|------|------|
+| test-manifest.js | `shared/` (공통 1개) | 전체 테스트 목록을 한 곳에서 관리 |
+| test-base.css | `shared/` (공통 1개) | 뷰어 스타일은 동일 |
+| test-renderer.js | `shared/` (공통 1개) | 렌더링 로직은 동일 |
+| 테스트 데이터 .js | `{category}/` (서버별) | 각 클라이언트마다 기능이 다름 |
+
+### test-manifest.js 예시
+
+```javascript
+window.__TEST_MANIFEST__ = {
+  miniapp: {
+    label: "Mini App",
+    items: [
+      { file: "miniapp/home.js", feature: "홈", screen: "home", totalCases: 12 },
+      { file: "miniapp/settings.js", feature: "설정", screen: "settings", totalCases: 8 }
+    ]
+  },
+  admin: {
+    label: "Admin Dashboard",
+    items: [
+      { file: "admin/dashboard.js", feature: "대시보드", screen: "dashboard", totalCases: 15 }
+    ]
+  }
+};
+```
+
+### 새 서버 추가 시
+1. `docs/test/{category}/` 디렉토리 생성
+2. manifest에 카테고리 추가
+3. 해당 서버의 기능별 테스트 데이터 생성
+
+
+---
+
+## 멀티 클라이언트 구조
+
+프로젝트에 클라이언트가 여러 개 있으면 카테고리로 분리한다.
+
+### 원칙
+
+- **카테고리 이름은 프로젝트에 맞게 자유 결정** — 디자인 문서의 카테고리와 일치시킨다
+- **분리 기준**: 대상 사용자/플랫폼이 다르면 카테고리를 나눈다
+- **같은 기능이라도 클라이언트별로 각각 테스트 파일을 작성한다** — 공유/참조 패턴 사용하지 않음
+
+### 구조 예시
+
+```
+docs/test/
+├── {client-a}/
+│   ├── home.js
+│   └── settings.js
+├── {client-b}/
+│   ├── dashboard.js
+│   └── users.js
+└── shared/
+    ├── test-manifest.js    ← 카테고리별 구분
+    ├── test-base.css
+    └── test-renderer.js
+```
+
+### test-manifest.js에서 카테고리 표현
+
+```javascript
+window.__TEST_MANIFEST__ = {
+  "{client-a}": {
+    label: "표시명",
+    items: [...]
+  },
+  "{client-b}": {
+    label: "표시명",
+    items: [...]
+  }
+};
+```
+
+### 단일 클라이언트 프로젝트
+
+카테고리 분리 없이:
+```
+docs/test/
+├── home.js
+├── settings.js
+└── shared/
+```
