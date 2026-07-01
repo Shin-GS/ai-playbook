@@ -10,7 +10,8 @@
       "tags": ["java", "spring-boot", "jpa", "backend"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/backend-java-spring.md"
+      "path": "source/rules/backend-java-spring.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "frontend-react",
@@ -20,7 +21,8 @@
       "tags": ["react", "typescript", "tailwind", "frontend"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/frontend-react.md"
+      "path": "source/rules/frontend-react.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "git-workflow",
@@ -30,7 +32,8 @@
       "tags": ["git", "commit", "workflow"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/git-workflow.md"
+      "path": "source/rules/git-workflow.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "dev-language",
@@ -40,7 +43,8 @@
       "tags": ["language", "convention", "communication"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/dev-language.md"
+      "path": "source/rules/dev-language.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "nodejs-commonjs",
@@ -50,7 +54,8 @@
       "tags": ["nodejs", "javascript", "commonjs", "backend"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/nodejs-commonjs.md"
+      "path": "source/rules/nodejs-commonjs.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "layered-architecture",
@@ -60,7 +65,8 @@
       "tags": ["architecture", "layered", "backend", "java"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/layered-architecture.md"
+      "path": "source/rules/layered-architecture.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "subagents-collaboration",
@@ -70,7 +76,8 @@
       "tags": ["workflow", "subagents", "collaboration", "loop-control"],
       "version": "1.4",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/subagents-collaboration.md"
+      "path": "source/workflows/subagents-collaboration.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "context-efficiency",
@@ -80,7 +87,8 @@
       "tags": ["workflow", "context", "efficiency", "loop-control"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/context-efficiency.md"
+      "path": "source/workflows/context-efficiency.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "dist-conversion-kiro",
@@ -90,7 +98,8 @@
       "tags": ["workflow", "conversion", "kiro", "dist"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/dist-conversion-kiro.md"
+      "path": "source/workflows/dist-conversion-kiro.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "backend-developer",
@@ -100,7 +109,8 @@
       "tags": ["java", "spring-boot", "backend", "developer"],
       "version": "1.2",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/backend-developer.md"
+      "path": "source/agents/backend-developer.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "backend-code-reviewer",
@@ -110,7 +120,8 @@
       "tags": ["java", "spring-boot", "code-review", "backend"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/backend-code-reviewer.md"
+      "path": "source/agents/backend-code-reviewer.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "java-architect",
@@ -120,7 +131,8 @@
       "tags": ["java", "architecture", "backend"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/java-architect.md"
+      "path": "source/agents/java-architect.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "frontend-developer",
@@ -130,7 +142,8 @@
       "tags": ["react", "typescript", "frontend", "developer"],
       "version": "1.2",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/frontend-developer.md"
+      "path": "source/agents/frontend-developer.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "qa-tester",
@@ -140,7 +153,8 @@
       "tags": ["qa", "testing", "checklist"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/qa-tester.md"
+      "path": "source/agents/qa-tester.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "product-planner",
@@ -150,7 +164,8 @@
       "tags": ["planning", "product", "documentation"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/product-planner.md"
+      "path": "source/agents/product-planner.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "code-reviewer-nodejs",
@@ -160,7 +175,8 @@
       "tags": ["nodejs", "javascript", "code-review"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/code-reviewer-nodejs.md"
+      "path": "source/agents/code-reviewer-nodejs.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "bug-investigator",
@@ -170,7 +186,8 @@
       "tags": ["debugging", "investigation", "bugfix"],
       "version": "1.2",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/bug-investigator.md"
+      "path": "source/agents/bug-investigator.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "block-git-commit",
@@ -180,7 +197,8 @@
       "tags": ["git", "safety", "commit"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/automations/block-git-commit.md"
+      "path": "source/automations/block-git-commit.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "block-env-read",
@@ -190,7 +208,8 @@
       "tags": ["security", "env", "secrets"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/automations/block-env-read.md"
+      "path": "source/automations/block-env-read.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "conventional-commit",
@@ -200,7 +219,8 @@
       "tags": ["git", "commit", "automation"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/automations/conventional-commit.md"
+      "path": "source/automations/conventional-commit.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "security-coding",
@@ -210,7 +230,8 @@
       "tags": ["security", "coding", "checklist"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/security-coding.md"
+      "path": "source/rules/security-coding.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "multi-perspective-review",
@@ -220,7 +241,8 @@
       "tags": ["workflow", "persona", "review", "decision-making"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/multi-perspective-review.md"
+      "path": "source/workflows/multi-perspective-review.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "parallel-work",
@@ -230,7 +252,8 @@
       "tags": ["workflow", "git", "worktree", "parallel"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/parallel-work.md"
+      "path": "source/workflows/parallel-work.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "ask-before-assume",
@@ -240,7 +263,8 @@
       "tags": ["communication", "decision", "user-interaction"],
       "version": "1.2",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/ask-before-assume.md"
+      "path": "source/rules/ask-before-assume.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "verification-loop",
@@ -250,7 +274,8 @@
       "tags": ["workflow", "verification", "loop-control", "harness"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/verification-loop.md"
+      "path": "source/workflows/verification-loop.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "design-system",
@@ -260,7 +285,8 @@
       "tags": ["workflow", "design", "ui", "ux", "design-system"],
       "version": "1.3",
       "updatedAt": "2026-07-01",
-      "path": "source/workflows/design-system.md"
+      "path": "source/workflows/design-system.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "lessons-learned",
@@ -270,7 +296,8 @@
       "tags": ["automation", "learning", "knowledge", "growth"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/automations/lessons-learned.md"
+      "path": "source/automations/lessons-learned.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "ui-designer",
@@ -280,7 +307,8 @@
       "tags": ["design", "ui", "ux", "html", "css", "design-system"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/ui-designer.md"
+      "path": "source/agents/ui-designer.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "marketing-strategist",
@@ -290,7 +318,8 @@
       "tags": ["marketing", "strategy", "content", "growth"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/agents/marketing-strategist.md"
+      "path": "source/agents/marketing-strategist.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "design-docs-system",
@@ -300,7 +329,8 @@
       "tags": ["design", "documentation", "html", "css", "design-system"],
       "version": "1.2",
       "updatedAt": "2026-07-01",
-      "path": "source/skills/design/design-docs-system.md"
+      "path": "source/skills/design/design-docs-system.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "project-docs-structure",
@@ -310,7 +340,8 @@
       "tags": ["planning", "documentation", "project-setup"],
       "version": "1.3",
       "updatedAt": "2026-07-01",
-      "path": "source/skills/planning/project-docs-structure.md"
+      "path": "source/skills/planning/project-docs-structure.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "test-docs-system",
@@ -320,7 +351,8 @@
       "tags": ["qa", "testing", "documentation", "checklist"],
       "version": "1.2",
       "updatedAt": "2026-07-01",
-      "path": "source/skills/qa/test-docs-system.md"
+      "path": "source/skills/qa/test-docs-system.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "testing-strategy",
@@ -330,7 +362,8 @@
       "tags": ["testing", "qa", "strategy", "automation"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/testing-strategy.md"
+      "path": "source/rules/testing-strategy.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "work-strategy",
@@ -340,7 +373,8 @@
       "tags": ["strategy", "tools", "subagents", "worktree", "context", "decision"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/work-strategy.md"
+      "path": "source/rules/work-strategy.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "scope-judgment",
@@ -350,7 +384,8 @@
       "tags": ["scope", "decision", "todo", "focus"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/scope-judgment.md"
+      "path": "source/rules/scope-judgment.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "incident-response",
@@ -360,7 +395,8 @@
       "tags": ["operations", "incident", "response", "troubleshooting"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/skills/operations/incident-response.md"
+      "path": "source/skills/operations/incident-response.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "backup-recovery",
@@ -370,7 +406,8 @@
       "tags": ["operations", "backup", "recovery", "database"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/skills/operations/backup-recovery.md"
+      "path": "source/skills/operations/backup-recovery.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "voc-handling",
@@ -380,7 +417,8 @@
       "tags": ["operations", "voc", "customer-support", "feedback"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/skills/operations/voc-handling.md"
+      "path": "source/skills/operations/voc-handling.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "commit-granularity",
@@ -390,7 +428,8 @@
       "tags": ["git", "commit", "granularity"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/commit-granularity.md"
+      "path": "source/rules/commit-granularity.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "code-reading-order",
@@ -400,7 +439,8 @@
       "tags": ["reading", "navigation", "understanding", "codebase"],
       "version": "1.1",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/code-reading-order.md"
+      "path": "source/rules/code-reading-order.md",
+      "changelog": "초기 버전"
     },
     {
       "id": "naming-conventions",
@@ -410,7 +450,34 @@
       "tags": ["naming", "convention", "api", "database", "structure"],
       "version": "1.0",
       "updatedAt": "2026-07-01",
-      "path": "source/rules/naming-conventions.md"
+      "path": "source/rules/naming-conventions.md",
+      "changelog": "초기 버전"
     }
-  ]
+  ],
+  "groups": {
+    "java-backend": {
+      "description": "Java/Spring 백엔드 개발 세트",
+      "assets": ["backend-java-spring", "layered-architecture", "naming-conventions", "security-coding", "backend-developer", "backend-code-reviewer", "java-architect"]
+    },
+    "react-frontend": {
+      "description": "React/TypeScript 프론트엔드 개발 세트",
+      "assets": ["frontend-react", "naming-conventions", "security-coding", "frontend-developer"]
+    },
+    "nodejs-backend": {
+      "description": "Node.js 백엔드 개발 세트",
+      "assets": ["nodejs-commonjs", "naming-conventions", "security-coding", "code-reviewer-nodejs"]
+    },
+    "project-setup": {
+      "description": "프로젝트 초기 세팅 (문서 + 디자인 + 테스트 시스템)",
+      "assets": ["project-docs-structure", "design-docs-system", "test-docs-system", "design-system"]
+    },
+    "common-rules": {
+      "description": "모든 프로젝트에 공통 적용할 규칙",
+      "assets": ["dev-language", "git-workflow", "commit-granularity", "ask-before-assume", "scope-judgment", "work-strategy", "security-coding", "naming-conventions"]
+    },
+    "workflow-full": {
+      "description": "서브에이전트 협업 + 검증 + 다관점 심의 전체 세트",
+      "assets": ["subagents-collaboration", "verification-loop", "multi-perspective-review", "context-efficiency"]
+    }
+  }
 }

@@ -14,6 +14,8 @@ inclusion: always
 - version: "X.Y" 형식
 - updatedAt: YYYY-MM-DD
 - changelog: 최신 변경 요약
+- activation: always | fileMatch | manual (도구가 이 자산을 어떻게 활성화하는지)
+- activationPattern: 파일 패턴 배열 (activation이 fileMatch일 때만. 예: ["**/*.java", "**/*.kts"])
 
 ## 네이밍 규칙
 - id = 파일명 (확장자 제외)
