@@ -68,7 +68,7 @@
       "name": "서브에이전트 협업 워크플로우",
       "description": "서브에이전트 협업 순서와 역할 분담, 루프 제어 포함",
       "tags": ["workflow", "subagents", "collaboration", "loop-control"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/subagents-collaboration.md"
     },
@@ -98,7 +98,7 @@
       "name": "Backend Developer",
       "description": "Java + Spring Boot 기반 시니어 백엔드 개발자 에이전트",
       "tags": ["java", "spring-boot", "backend", "developer"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/backend-developer.md"
     },
@@ -128,7 +128,7 @@
       "name": "Frontend Developer",
       "description": "React + TypeScript 기반 시니어 프론트엔드 개발자 에이전트",
       "tags": ["react", "typescript", "frontend", "developer"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/frontend-developer.md"
     },
@@ -168,7 +168,7 @@
       "name": "Bug Investigator",
       "description": "로그 분석과 코드 추적으로 버그 원인을 찾고 수정 방향을 제안하는 에이전트",
       "tags": ["debugging", "investigation", "bugfix"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/bug-investigator.md"
     },
@@ -321,6 +321,16 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/qa/test-docs-system.md"
+    },
+    {
+      "id": "testing-strategy",
+      "type": "rule",
+      "name": "테스트 전략",
+      "description": "자동 테스트와 수동 QA의 구분 기준 및 역할 분담",
+      "tags": ["testing", "qa", "strategy", "automation"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/testing-strategy.md"
     }
   ]
 }
