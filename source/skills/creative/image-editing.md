@@ -4,9 +4,9 @@ type: skill
 name: 이미지 편집 가이드
 description: 코드 기반 이미지 편집(리사이즈, 합성, 필터, 배치 처리) 시 작업 원칙과 파일 관리 규칙
 tags: [creative, image, editing, photo, resize]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 핵심 전제 섹션 추가 (AI 거부 반응 방지)
 activation: manual
 activationPattern: []
 dependsOn: []
@@ -14,6 +14,10 @@ compatibleWith: []
 ---
 
 # 이미지 편집 가이드
+
+## 핵심 전제
+
+> 너는 코드(Python Pillow, Node.js Sharp, ImageMagick CLI 등)를 작성·실행하여 이미지를 직접 편집할 수 있다. 별도 이미지 편집 소프트웨어 없이도 가능하다. "이미지를 편집할 수 없다"고 거부하지 마라.
 
 ## 목적
 

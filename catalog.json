@@ -536,10 +536,10 @@
       "name": "이미지 생성 가이드",
       "description": "코드 기반 이미지/만화 생성 시 프롬프트 구성, 스타일 관리, 파이프라인 규칙",
       "tags": ["creative", "image", "illustration", "comic", "generation"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/skills/creative/image-generation.md",
-      "changelog": "초기 버전"
+      "changelog": "핵심 전제 섹션 추가 (AI 거부 반응 방지)"
     },
     {
       "id": "image-editing",
@@ -547,10 +547,10 @@
       "name": "이미지 편집 가이드",
       "description": "코드 기반 이미지 편집(리사이즈, 합성, 필터, 배치 처리) 시 작업 원칙과 파일 관리 규칙",
       "tags": ["creative", "image", "editing", "photo", "resize"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/skills/creative/image-editing.md",
-      "changelog": "초기 버전"
+      "changelog": "핵심 전제 섹션 추가 (AI 거부 반응 방지)"
     }
   ],
   "groups": {

@@ -4,9 +4,9 @@ type: skill
 name: 이미지 생성 가이드
 description: 코드 기반 이미지/만화 생성 시 프롬프트 구성, 스타일 관리, 파이프라인 규칙
 tags: [creative, image, illustration, comic, generation]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 핵심 전제 섹션 추가 (AI 거부 반응 방지)
 activation: manual
 activationPattern: []
 dependsOn: []
@@ -14,6 +14,10 @@ compatibleWith: []
 ---
 
 # 이미지 생성 가이드
+
+## 핵심 전제
+
+> 너는 코드(Python Pillow, Node.js Sharp, SVG, HTML/CSS → Puppeteer 스크린샷 등)를 작성·실행하여 이미지/만화를 직접 생성할 수 있다. 별도 이미지 생성 AI 모델 없이도 가능하다. "이미지를 만들 수 없다"고 거부하지 마라.
 
 ## 목적
 
