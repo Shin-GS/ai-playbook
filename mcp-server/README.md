@@ -29,7 +29,55 @@ node src/index.js
 
 ## 배포
 
-1. VPS에 ai-playbook repo clone
-2. `cd mcp-server && node src/index.js` (pm2 권장)
-3. Nginx 리버스 프록시 + SSL 설정
-4. GitHub Actions로 push 시 자동 git pull + pm2 restart
+GitHub Actions (workflow_dispatch, 수동 트리거)로 배포:
+1. "Run workflow" 클릭
+2. 전체 파일 SCP로 VPS 전송
+3. pm2로 서버 재시작
+4. Health check 자동 확인
+
+### VPS 초기 요구사항
+
+- Node.js 18+
+- pm2 (`npm install -g pm2`)
+- Nginx (리버스 프록시 + SSL)
+
+### 환경변수
+
+pm2 ecosystem.config.js에서 관리. 또는 VPS에서:
+```bash
+cd ~/ai-playbook/mcp-server
+PLAYBOOK_API_KEY="your-key" pm2 start ecosystem.config.js
+pm2 save
+pm2 startup  # 서버 재부팅 시 자동 시작
+```
+
+### Nginx 설정 예시
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name playbook-api.your-domain.com;
+
+    ssl_certificate /etc/letsencrypt/live/playbook-api.your-domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/playbook-api.your-domain.com/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:3100;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+server {
+    listen 80;
+    server_name playbook-api.your-domain.com;
+    return 301 https://$host$request_uri;
+}
+```
+
+SSL 인증서 발급:
+```bash
+sudo certbot --nginx -d playbook-api.your-domain.com
+```
