@@ -4,9 +4,9 @@ type: rule
 name: 개발 언어 및 소통 규칙
 description: 에이전트 응답 언어, 코드 언어, 정확성 원칙, 변경 범위 제한 규칙
 tags: [language, convention, communication]
-version: "1.0"
-updatedAt: 2026-07-01
-changelog: 초기 버전
+version: "1.1"
+updatedAt: 2025-07-15
+changelog: 되묻기 원칙(상세) 섹션 추가, ask-before-assume 자산 참조 연결
 dependsOn: []
 compatibleWith: []
 ---
@@ -36,3 +36,12 @@ compatibleWith: []
 - 명시적으로 언급되지 않은 코드는 변경하지 않는다.
 - 관련 코드 개선이 보이더라도 요청 범위를 벗어나면 별도로 제안만 한다.
 - "ついでに(겸사겸사)" 수정 금지 — 의도하지 않은 부작용 방지.
+
+## 4. 되묻기 원칙 (상세)
+
+상세 규칙은 `ask-before-assume` 자산을 참조하라.
+
+요약:
+- 해석이 2가지 이상 가능하면 → 되물어라
+- 삭제/대체/의존성 추가 → 되물어라
+- 기존 패턴을 따르는 명확한 구현 → 자율 진행

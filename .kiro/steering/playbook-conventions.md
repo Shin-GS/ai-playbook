@@ -27,3 +27,60 @@ inclusion: always
 
 ## catalog.json
 - source/ 파일 추가/수정 시 catalog.json도 함께 갱신
+
+---
+
+## 타입별 본문 구조
+
+### rule (규칙)
+- 번호 매긴 규칙 항목 (각각 독립적으로 참조 가능)
+- 각 규칙에 **왜** (이유) 포함 권장
+- 코드 예시 (있으면)
+- "피해야 할 패턴" 섹션 (있으면)
+
+### workflow (워크플로우)
+- 목적 (한두 줄)
+- Steps: 각 step에 **done-when** + **fail-action** 필수
+- 판단 기준 (분기가 있으면 테이블)
+- 주의사항
+
+### agent (에이전트)
+- Persona (한두 줄 역할)
+- Mission (무엇을 하는지)
+- 산출물/Output Format (결과 형식)
+- (선택) Constraints, 작업 규칙, Checklist
+
+### automation (자동화)
+- Trigger: event + condition
+- Action: 행동 기술
+- Notes: 부가 설명
+
+### skill (스킬/지식)
+- 자유 형식 (지식 문서라 구조 강제 불필요)
+- 참고 가능한 섹션 분리 권장
+
+---
+
+## CRUD 절차
+
+### 새 자산 추가 시
+1. `source/{type_plural}/{id}.md` 생성 (위 frontmatter + 타입별 본문 구조)
+2. `catalog.json`에 엔트리 추가
+3. `dist/kiro/` 변환 생성 (dist-conversion-kiro 워크플로우 참조)
+4. `dist/kiro/manifest.json` 갱신
+5. 해당 프리셋에 포함 여부 판단 → `templates/presets/` 갱신
+
+### 기존 자산 수정 시
+1. `source/{type_plural}/{id}.md` 수정
+2. frontmatter: version 증분 + updatedAt 갱신 + changelog 기록
+3. `catalog.json`의 해당 엔트리 version/updatedAt 갱신
+4. `dist/kiro/` 해당 파일 재변환
+5. `dist/kiro/manifest.json` updatedAt 갱신
+
+### 자산 삭제 시
+1. `source/{type_plural}/{id}.md` 삭제
+2. `catalog.json`에서 해당 엔트리 제거
+3. `dist/kiro/` 해당 파일 삭제
+4. `dist/kiro/manifest.json`에서 제거
+5. `dependsOn`으로 참조하는 다른 자산 확인 → 의존성 제거/대체
+6. `templates/presets/`에서 해당 id 제거
