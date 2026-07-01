@@ -258,7 +258,7 @@
       "name": "디자인 시스템 구축 워크플로우",
       "description": "프로젝트별 디자인 시스템(토큰→컴포넌트→페이지) 구축 순서와 규칙",
       "tags": ["workflow", "design", "ui", "ux", "design-system"],
-      "version": "1.1",
+      "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/design-system.md"
     },
@@ -301,6 +301,16 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/skills/design/design-docs-system.md"
+    },
+    {
+      "id": "project-docs-structure",
+      "type": "skill",
+      "name": "프로젝트 기획 문서 구조",
+      "description": "프로젝트 시작 시 갖춰야 할 기획 문서 4종의 구조와 권장 내용",
+      "tags": ["planning", "documentation", "project-setup"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/skills/planning/project-docs-structure.md"
     }
   ]
 }

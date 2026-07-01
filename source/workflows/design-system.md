@@ -4,9 +4,9 @@ type: workflow
 name: 디자인 시스템 구축 워크플로우
 description: 프로젝트별 디자인 시스템(토큰→컴포넌트→페이지) 구축 순서와 규칙
 tags: [workflow, design, ui, ux, design-system]
-version: "1.1"
+version: "1.2"
 updatedAt: 2026-07-01
-changelog: Step 0 (docs/design/ 초기 구조 세팅) 추가
+changelog: 선행 조건(기획 문서 확인) 단계 추가
 dependsOn: [multi-perspective-review]
 compatibleWith: [react, typescript]
 ---
@@ -22,6 +22,12 @@ compatibleWith: [react, typescript]
 > ⚠️ tokens.css + components.css + 시스템 HTML이 없는 상태에서 페이지 구현을 시작하면 안 된다.
 
 ## Steps
+
+### 선행 조건: 기획 문서 확인
+- **done-when**: product.md + glossary.md가 프로젝트에 존재하고 steering으로 등록됨
+- **fail-action**: 존재하지 않으면 `project-docs-structure` skill을 참조하여 먼저 생성. 디자인 작업으로 넘어가지 않는다.
+
+> 기획 문서(product.md, glossary.md) 없이 디자인 시스템을 구축하면, AI가 프로젝트 맥락을 모른 채 디자인하게 되어 일관성이 깨진다.
 
 ### Step 0: docs/design/ 초기 구조 세팅
 - **done-when**: docs/design/ 디렉토리에 index.html, shared/ (design-manifest.js, tokens.css, base.css, components.css), README.md가 존재

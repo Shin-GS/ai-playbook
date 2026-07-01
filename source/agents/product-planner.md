@@ -7,7 +7,7 @@ tags: [planning, product, documentation]
 version: "1.0"
 updatedAt: 2026-07-01
 changelog: 초기 버전
-dependsOn: []
+dependsOn: [project-docs-structure]
 compatibleWith: []
 ---
 
