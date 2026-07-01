@@ -7,15 +7,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to VPS
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "source/,catalog.json,mcp-server/"
+          target: "~/ai-playbook"
+          overwrite: true
+
+      - name: Restart server
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/ai-playbook
-            git pull origin main
-            cd mcp-server
+            cd ~/ai-playbook/mcp-server
             pm2 restart ai-playbook-server || pm2 start src/index.js --name ai-playbook-server
             pm2 save
+            sleep 2
+            curl -f http://localhost:3100/health || echo "Health check failed"
+
