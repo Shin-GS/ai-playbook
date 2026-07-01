@@ -21,8 +21,10 @@ function readAsset(assetPath) {
 }
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return { frontmatter: {}, body: content };
+  // Normalize line endings (Windows \r\n → \n)
+  const normalized = content.replace(/\r\n/g, '\n');
+  const match = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) return { frontmatter: {}, body: normalized };
 
   const frontmatterLines = match[1].split('\n');
   const frontmatter = {};
