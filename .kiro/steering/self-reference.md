@@ -12,3 +12,6 @@ inclusion: always
 
 ## 변환 절차
 #[[file:source/workflows/kiro-conversion.md]]
+
+## 명령어
+#[[file:source/skills/commands/shortcuts.md]]

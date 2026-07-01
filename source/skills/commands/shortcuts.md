@@ -4,10 +4,10 @@ type: skill
 name: 명령어 단축키
 description: 자주 사용하는 워크플로우를 빠르게 트리거하는 명령어 정의
 tags: [commands, shortcuts, workflow, productivity]
-version: "1.0"
+version: "1.3"
 updatedAt: 2026-07-01
-changelog: 초기 버전
-dependsOn: [subagents-collaboration, work-strategy]
+changelog: /만화, /사진편집 명령어 추가
+dependsOn: [subagents-collaboration, work-strategy, image-generation, image-editing]
 compatibleWith: []
 ---
 
@@ -24,13 +24,15 @@ compatibleWith: []
 
 ## 명령어 목록
 
-| 명령 | 동작 | 참조 workflow |
-|------|------|--------------|
+| 명령 | 동작 | 참조 자산 |
+|------|------|----------|
 | `/기획 {설명}` | 기획 워크플로우 | subagents-collaboration Phase 1 + 1.5 |
 | `/디자인 {설명}` | 디자인 워크플로우 | subagents-collaboration Phase 2 + 2.5 |
 | `/리뷰` | 현재 변경사항 리뷰 | subagents-collaboration Phase 4 |
 | `/배포전` | 배포 전 종합 체크 | verification-loop + 문서 동기화 + QA |
 | `/영향분석 {설명}` | 영향 범위 분석 | subagents-collaboration Phase 0 |
+| `/만화 {설명}` | 만화/일러스트 생성 | image-generation |
+| `/사진편집 {설명}` | 이미지 편집 | image-editing |
 
 ---
 
@@ -189,6 +191,78 @@ compatibleWith: []
 /영향분석 결제를 카카오페이에서 토스로 변경
 /영향분석 사용자 테이블에 phone 컬럼 추가
 /영향분석 인증 방식을 JWT에서 세션으로 변경
+```
+
+---
+
+## /만화 {설명}
+
+만화/일러스트 생성 파이프라인을 실행한다.
+
+> 이 명령 실행 시 `source/skills/creative/image-generation.md` 를 반드시 읽고 파이프라인을 따를 것.
+
+### 동작 절차
+
+1. **확인**: 작업 전 확인 사항 (image-generation skill 기준)
+   - 타겟 플랫폼 → 사이즈 자동 결정
+   - 스타일 → 기존 style-guide.md 있으면 참조, 없으면 정의
+   - 캐릭터 → 기존 시트 있으면 참조, 없으면 생성
+   - 용도 → SNS? 앱? 마케팅?
+
+2. **문서 생성/확인**: world.md, style-guide.md, characters/ 참조 또는 생성
+
+3. **지시서 작성**: projects/{프로젝트}/brief.md 또는 ep{N}.md 생성
+
+4. **아스키 프로토타입**: 콘솔 스타일 아스키 아트로 레이아웃 시각화
+   - 사용자 확인 → 수정 → 반복
+
+5. **코드 생성·실행**: 프로토타입 + 지시서 기반 이미지 코드 (SVG, Pillow, Sharp 등)
+
+6. **검증**: 사이즈, 텍스트 잘림, 스타일 일관성 자동 체크
+
+7. **출력**: assets/output/ 에 저장
+
+### 예시
+
+```
+/만화 인스타그램용 4컷, 재택근무하는 고양이
+/만화 유튜브 썸네일, "오늘의 코딩 실수 TOP3"
+/만화 캐릭터 토리로 새 에피소드, 비 오는 날 카페
+```
+
+---
+
+## /사진편집 {설명}
+
+이미지 편집 파이프라인을 실행한다.
+
+> 이 명령 실행 시 `source/skills/creative/image-editing.md` 를 반드시 읽고 파이프라인을 따를 것.
+
+### 동작 절차
+
+1. **확인**: 작업 전 확인 사항 (image-editing skill 기준)
+   - 원본 이미지 위치
+   - 수정본 저장 위치
+   - 타겟 플랫폼/용도 → 사이즈·포맷 자동 결정
+   - 편집 종류 (리사이즈, 필터, 합성, 워터마크 등)
+   - 배치 여부 (단일 vs 다수)
+
+2. **편집 지시서 생성** (복잡한 작업 시)
+
+3. **1개 파일 테스트** (배치 시): 결과 확인 후 전체 적용
+
+4. **코드 생성·실행**: Sharp, Pillow, ImageMagick 등
+
+5. **검증**: 원본 무변경, 사이즈, 포맷, 용량 체크
+
+6. **결과 보고**: 성공/실패 목록
+
+### 예시
+
+```
+/사진편집 assets/original/ 이미지들을 인스타 피드 사이즈로 리사이즈
+/사진편집 hero.png에 로고 워터마크 추가
+/사진편집 product/ 폴더 전체 배경 제거
 ```
 
 ---
