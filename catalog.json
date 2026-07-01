@@ -518,6 +518,17 @@
       "updatedAt": "2026-07-01",
       "path": "source/skills/commands/shortcuts.md",
       "changelog": "초기 버전"
+    },
+    {
+      "id": "nodejs-developer",
+      "type": "agent",
+      "name": "Node.js Developer",
+      "description": "Node.js 백엔드 시니어 개발자 에이전트",
+      "tags": ["nodejs", "javascript", "backend", "developer"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/nodejs-developer.md",
+      "changelog": "초기 버전"
     }
   ],
   "groups": {
@@ -531,7 +542,7 @@
     },
     "nodejs-backend": {
       "description": "Node.js 백엔드 개발 세트",
-      "assets": ["nodejs-commonjs", "naming-conventions", "security-coding", "code-reviewer-nodejs"]
+      "assets": ["nodejs-commonjs", "naming-conventions", "security-coding", "nodejs-developer", "code-reviewer-nodejs"]
     },
     "project-setup": {
       "description": "프로젝트 초기 세팅 (문서 + 디자인 + 테스트 시스템)",
