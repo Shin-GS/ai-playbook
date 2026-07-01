@@ -507,6 +507,17 @@
       "updatedAt": "2026-07-01",
       "path": "source/rules/naming-conventions.md",
       "changelog": "초기 버전"
+    },
+    {
+      "id": "shortcuts",
+      "type": "skill",
+      "name": "명령어 단축키",
+      "description": "자주 사용하는 워크플로우를 빠르게 트리거하는 명령어 정의",
+      "tags": ["commands", "shortcuts", "workflow", "productivity"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/skills/commands/shortcuts.md",
+      "changelog": "초기 버전"
     }
   ],
   "groups": {
