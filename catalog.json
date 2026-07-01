@@ -271,6 +271,26 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/automations/lessons-learned.md"
+    },
+    {
+      "id": "ui-designer",
+      "type": "agent",
+      "name": "UI Designer",
+      "description": "HTML/CSS 기반 디자인 명세 구현 및 디자인 시스템 관리 에이전트",
+      "tags": ["design", "ui", "ux", "html", "css", "design-system"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/ui-designer.md"
+    },
+    {
+      "id": "marketing-strategist",
+      "type": "agent",
+      "name": "Marketing Strategist",
+      "description": "무예산 1인 빌더를 위한 마케팅 전략 수립, 콘텐츠 작성, 채널 관리 에이전트",
+      "tags": ["marketing", "strategy", "content", "growth"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/marketing-strategist.md"
     }
   ]
 }
