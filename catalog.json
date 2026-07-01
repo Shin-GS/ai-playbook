@@ -421,6 +421,17 @@
       "changelog": "초기 버전"
     },
     {
+      "id": "error-handling",
+      "type": "rule",
+      "name": "에러 처리 전략",
+      "description": "에러 분류, 사용자/개발자 메시지 분리, 로깅 기준, 재시도 전략을 포함한 범용 에러 처리 규칙",
+      "tags": ["error-handling", "logging", "retry", "resilience"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/error-handling.md",
+      "changelog": "초기 버전"
+    },
+    {
       "id": "commit-granularity",
       "type": "rule",
       "name": "커밋 분리 기준",
