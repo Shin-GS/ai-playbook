@@ -536,10 +536,10 @@
       "name": "이미지 생성 가이드",
       "description": "코드 기반 이미지/만화 생성 시 프롬프트 구성, 스타일 관리, 파이프라인 규칙",
       "tags": ["creative", "image", "illustration", "comic", "generation"],
-      "version": "1.1",
+      "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/creative/image-generation.md",
-      "changelog": "핵심 전제 섹션 추가 (AI 거부 반응 방지)"
+      "changelog": "기술 스택을 HTML/CSS+Puppeteer 기본으로 개편, SVG 파츠 시스템·만화 스타일 규칙·레퍼런스 템플릿 섹션 추가"
     },
     {
       "id": "image-editing",

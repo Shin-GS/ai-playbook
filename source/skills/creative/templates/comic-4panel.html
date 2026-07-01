@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>4컷 만화 템플릿</title>
+  <style>
+    /* === 기본 설정 === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+    :root {
+      --panel-border: #2D3436;
+      --panel-bg: #FFF8E7;
+      --bubble-bg: #FFFFFF;
+      --text-color: #2D3436;
+      --accent: #FF6B6B;
+      --shadow: 2px 2px 0px #2D3436;
+      --panel-gap: 10px;
+      --panel-radius: 8px;
+      --border-width: 3px;
+    }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      background: var(--panel-bg);
+      font-family: 'Comic Neue', cursive;
+      padding: var(--panel-gap);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: var(--panel-gap);
+    }
+
+    /* === 패널 === */
+    .panel {
+      border: var(--border-width) solid var(--panel-border);
+      border-radius: var(--panel-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      background: white;
+    }
+
+    .panel-content {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    /* === 배경 === */
+    .bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .bg-cafe {
+      background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 100%);
+    }
+
+    .bg-simple {
+      background: #F8F9FA;
+    }
+
+    .bg-warm {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+    }
+
+    /* === 캐릭터 영역 === */
+    .character {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .character img {
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* 캐릭터 위치 유틸리티 */
+    .char-left { left: 15%; bottom: 8%; }
+    .char-right { right: 15%; bottom: 8%; }
+    .char-center { left: 50%; bottom: 8%; transform: translateX(-50%); }
+
+    /* === 말풍선 === */
+    .bubble {
+      position: absolute;
+      z-index: 5;
+      background: var(--bubble-bg);
+      border: 2.5px solid var(--panel-border);
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-color);
+      max-width: 55%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* 말풍선 꼬리 - 아래 방향 */
+    .bubble-down::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 30%;
+      border: 8px solid transparent;
+      border-top-color: var(--panel-border);
+    }
+    .bubble-down::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: calc(30% + 2px);
+      border: 6px solid transparent;
+      border-top-color: var(--bubble-bg);
+      z-index: 1;
+    }
+
+    /* 말풍선 위치 유틸리티 */
+    .bubble-top-left { top: 10%; left: 8%; }
+    .bubble-top-right { top: 10%; right: 8%; }
+    .bubble-top-center { top: 10%; left: 50%; transform: translateX(-50%); }
+
+    /* === 효과 === */
+    .effect {
+      position: absolute;
+      z-index: 4;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .effect-sound {
+      font-style: italic;
+      transform: rotate(-5deg);
+      text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    }
+
+    /* === 나레이션 === */
+    .narration {
+      position: absolute;
+      z-index: 6;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      font-style: italic;
+      color: #636E72;
+      background: rgba(255,255,255,0.85);
+      padding: 6px 14px;
+      border-radius: 12px;
+    }
+
+    /* === 소품 === */
+    .prop {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .prop-front {
+      z-index: 3;
+    }
+
+    /* === 플레이스홀더 (파츠 없을 때) === */
+    .placeholder-char {
+      width: 120px;
+      height: 180px;
+      background: #DFE6E9;
+      border: 2px dashed #B2BEC3;
+      border-radius: 50% 50% 20% 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #636E72;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 패널 1: establishing -->
+  <div class="panel">
+    <div class="panel-content">
+      <div class="bg bg-cafe"></div>
+
+      <!-- 말풍선 -->
+      <div class="bubble bubble-down bubble-top-center">
+        오늘도 좋은 아침!
+      </div>
+
+      <!-- 캐릭터 (파츠 또는 플레이스홀더) -->
+      <div class="character char-center">
+        <div class="placeholder-char">캐릭터A</div>
+      </div>
+
+      <!-- 효과 -->
+      <span class="effect" style="top: 25%; right: 15%;">♪</span>
+    </div>
+  </div>
+
+  <!-- 패널 2: talk-2char -->
+  <div class="panel">
+    <div class="panel-content">
+      <div class="bg bg-simple"></div>
+
+      <div class="bubble bubble-down bubble-top-left">
+        커피 한잔?
+      </div>
+      <div class="bubble bubble-down bubble-top-right">
+        좋아!
+      </div>
+
+      <div class="character char-left">
+        <div class="placeholder-char">캐릭터A</div>
+      </div>
+      <div class="character char-right">
+        <div class="placeholder-char">캐릭터B</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 패널 3: reaction-solo -->
+  <div class="panel">
+    <div class="panel-content">
+      <div class="bg bg-warm"></div>
+
+      <div class="bubble bubble-down bubble-top-center">
+        세상에...!
+      </div>
+
+      <div class="character char-center">
+        <div class="placeholder-char">캐릭터A</div>
+      </div>
+
+      <!-- 효과음 -->
+      <span class="effect effect-sound" style="top: 15%; left: 10%;">두근</span>
+      <span class="effect" style="top: 30%; right: 12%;">✦</span>
+      <span class="effect" style="top: 20%; right: 25%;">✦</span>
+    </div>
+  </div>
+
+  <!-- 패널 4: narration-end -->
+  <div class="panel">
+    <div class="panel-content">
+      <div class="bg bg-cafe"></div>
+
+      <div class="character char-center">
+        <div class="placeholder-char">캐릭터A</div>
+      </div>
+
+      <!-- 나레이션 -->
+      <div class="narration">
+        그렇게 오늘 하루도 평화롭게 지나갔다.
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

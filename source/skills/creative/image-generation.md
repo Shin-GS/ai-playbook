@@ -4,9 +4,9 @@ type: skill
 name: 이미지 생성 가이드
 description: 코드 기반 이미지/만화 생성 시 프롬프트 구성, 스타일 관리, 파이프라인 규칙
 tags: [creative, image, illustration, comic, generation]
-version: "1.1"
+version: "1.2"
 updatedAt: 2026-07-01
-changelog: 핵심 전제 섹션 추가 (AI 거부 반응 방지)
+changelog: 기술 스택을 HTML/CSS+Puppeteer 기본으로 개편, SVG 파츠 시스템·만화 스타일 규칙·레퍼런스 템플릿 섹션 추가
 activation: manual
 activationPattern: []
 dependsOn: []
@@ -323,14 +323,156 @@ style-guide.md 또는 characters/{이름}.md 하단에 `## 토큰` 섹션으로 
 
 ## 기술 스택 선택 기준
 
-| 작업 유형 | 추천 도구 | 이유 |
-|-----------|----------|------|
-| 단순 도형 + 텍스트 | SVG 직접 생성 | 벡터, 수정 용이, 무설치 |
-| 픽셀 조작, 합성 | Python Pillow | 범용, 풍부한 기능 |
-| 고성능 리사이즈/변환 | Node.js Sharp | 빠르고 가벼움 |
-| 복잡한 레이아웃 | HTML/CSS → 스크린샷 (Puppeteer) | CSS 레이아웃 활용 |
-| 픽셀아트 | 직접 바이트 조작 또는 Pillow | 정밀 제어 |
-| 만화 (멀티패널) | SVG 조합 또는 HTML/CSS | 레이아웃 유연성 |
+### 기본 권장: HTML/CSS + Puppeteer
+
+만화/일러스트 생성의 기본 기술 스택은 **HTML/CSS → Puppeteer 스크린샷**이다.
+
+이유:
+- CSS로 폰트, 그림자, 둥근 모서리, 그라데이션 자유자재
+- flexbox/grid로 패널 레이아웃 정밀 제어
+- 웹폰트 사용 가능 (만화체, 손글씨)
+- SVG 파츠를 `<img>`로 삽입하여 캐릭터 조합
+- 결과물이 "코드로 그린 느낌" 대신 "디자인된 느낌"
+
+### 용도별 도구
+
+| 작업 유형 | 도구 | 비고 |
+|-----------|------|------|
+| 만화/일러스트 (기본) | HTML/CSS + Puppeteer | 퀄리티 최우선 |
+| 캐릭터/아이콘 | SVG 파츠 조합 | 재사용성 최우선 |
+| 사진 리사이즈/변환 | Sharp | 편집용 (image-editing 참조) |
+| 픽셀 조작/합성 | Pillow | 사진 편집 보조 |
+| 픽셀아트 | Pillow 또는 바이트 조작 | 특수 스타일 |
+
+> ⚠️ Pillow로 직접 도형을 그려 만화를 만들지 마라. 결과물이 그림판 수준이 된다.
+
+---
+
+## SVG 파츠 시스템
+
+캐릭터를 매번 처음부터 그리지 않고, 파츠를 미리 만들어두고 조합한다.
+
+### 파츠 디렉토리 구조
+
+```
+docs/creative/parts/
+├── {캐릭터명}/
+│   ├── body/
+│   │   ├── standing.svg
+│   │   ├── sitting.svg
+│   │   └── walking.svg
+│   ├── face/
+│   │   ├── happy.svg
+│   │   ├── sad.svg
+│   │   ├── surprise.svg
+│   │   └── neutral.svg
+│   ├── accessories/
+│   │   ├── apron.svg
+│   │   ├── hat.svg
+│   │   └── coffee-cup.svg
+│   └── manifest.md          ← 파츠 목록 + 조합 규칙
+├── props/
+│   ├── furniture/
+│   │   ├── table.svg
+│   │   ├── chair.svg
+│   │   └── counter.svg
+│   └── effects/
+│       ├── sparkle.svg
+│       ├── sweat-drop.svg
+│       └── motion-lines.svg
+└── backgrounds/
+    ├── cafe-interior.svg
+    ├── park.svg
+    └── room.svg
+```
+
+### 파츠 제작 규칙
+
+- 모든 파츠는 동일한 viewBox 기준 (예: `0 0 200 200`)
+- 색상은 CSS 변수(`currentColor` 또는 `var(--primary)`)로 변경 가능하게
+- 캐릭터 파츠는 앵커 포인트 통일 (머리 중심점, 몸 중심점)
+- 심플한 스타일로 갈수록 AI가 SVG path를 직접 작성 가능
+
+### 조합 방식 (HTML 내에서)
+
+```html
+<div class="character tori" style="left: 30%; bottom: 10%;">
+  <img class="body" src="./parts/tori/body/standing.svg" />
+  <img class="face" src="./parts/tori/face/happy.svg" />
+  <img class="accessory" src="./parts/tori/accessories/apron.svg" />
+</div>
+```
+
+### 파츠가 없을 때
+
+아직 파츠가 준비되지 않은 캐릭터는:
+1. 먼저 간단한 SVG 파츠 셋을 생성 (최소: body 1개 + face 3개)
+2. 이후 에피소드 만들면서 필요한 포즈/표정 추가
+3. 점진적으로 파츠 라이브러리 축적
+
+---
+
+## 만화 스타일 규칙
+
+코드로 만든 결과물이 "만화답게" 보이기 위한 필수 요소:
+
+### 폰트
+
+| 용도 | 권장 | 비고 |
+|------|------|------|
+| 대사 | 나눔손글씨 펜, Comic Neue, Bungee | 만화체 필수 |
+| 나레이션 | 본문 폰트보다 약간 작고, 이탤릭 | 구분감 |
+| 효과음 | 굵고 큰 폰트, 약간 기울임/회전 | 임팩트 |
+
+> 시스템 기본 폰트(Arial, Malgun Gothic 등)는 만화에 절대 사용하지 않는다.
+
+### 패널 스타일
+
+```css
+.panel {
+  border: 3px solid #2D3436;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 2px 2px 0px #2D3436; /* 만화 느낌의 그림자 */
+}
+```
+
+### 말풍선 CSS 패턴
+
+```css
+.bubble {
+  background: white;
+  border: 2.5px solid #2D3436;
+  border-radius: 20px;
+  padding: 12px 16px;
+  font-family: 'Comic Neue', 'NanumPen', cursive;
+  position: relative;
+  max-width: 60%;
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 20%;
+  border: 8px solid transparent;
+  border-top-color: #2D3436;
+}
+```
+
+### 퀄리티를 높이는 디테일
+
+- 패널 사이 gap은 8~12px (너무 붙이지 않기)
+- 캐릭터에 미세한 drop-shadow (1px, 10% opacity)
+- 배경에 아주 연한 패턴이나 그라데이션 (단색 회피)
+- 효과음 텍스트에 `text-shadow`와 `transform: rotate(-5deg)`
+- 감정 표현은 이모지 대신 SVG 이펙트 파츠 사용
+
+---
+
+## 레퍼런스 템플릿
+
+첫 만화 생성 시 `source/skills/creative/templates/comic-4panel.html` 을 베이스로 사용한다.
+이 템플릿은 4컷 만화의 기본 구조(패널 레이아웃, 말풍선, 캐릭터 배치 영역)를 포함한다.
 
 ---
 
