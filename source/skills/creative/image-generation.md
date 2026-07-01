@@ -4,9 +4,9 @@ type: skill
 name: 이미지 생성 가이드
 description: 코드 기반 이미지/만화 생성 시 프롬프트 구성, 스타일 관리, 파이프라인 규칙
 tags: [creative, image, illustration, comic, generation]
-version: "1.2"
+version: "1.3"
 updatedAt: 2026-07-01
-changelog: 기술 스택을 HTML/CSS+Puppeteer 기본으로 개편, SVG 파츠 시스템·만화 스타일 규칙·레퍼런스 템플릿 섹션 추가
+changelog: 레퍼런스 템플릿 사용 조건 변경 — 참고 이미지/스타일 가이드 우선, 템플릿은 구조 참고용으로 한정
 activation: manual
 activationPattern: []
 dependsOn: []
@@ -471,8 +471,8 @@ docs/creative/parts/
 
 ## 레퍼런스 템플릿
 
-첫 만화 생성 시 `source/skills/creative/templates/comic-4panel.html` 을 베이스로 사용한다.
-이 템플릿은 4컷 만화의 기본 구조(패널 레이아웃, 말풍선, 캐릭터 배치 영역)를 포함한다.
+참고 이미지나 기존 스타일 가이드가 없을 때, `source/skills/creative/templates/comic-4panel.html` 을 베이스로 사용한다.
+기존 스타일 가이드나 참고 이미지가 있으면 그것을 우선 따르고, 템플릿은 구조(패널 레이아웃, 말풍선 배치, z-index) 참고용으로만 활용한다.
 
 ---
 
