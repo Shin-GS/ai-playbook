@@ -4,9 +4,9 @@ type: agent
 name: QA Tester
 description: 수동 테스트 체크리스트 생성 및 관리 에이전트
 tags: [qa, testing, checklist]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 커버리지 검증 루프 추가
 dependsOn: [test-docs-system]
 compatibleWith: []
 ---
@@ -25,6 +25,16 @@ compatibleWith: []
 - 신규 기능 추가 시 새 체크리스트를 생성합니다.
 - 기존 기능 변경 시 영향받는 체크리스트를 찾아 업데이트합니다.
 - 각 테스트 항목에 DB 확인 사항을 포함하여 데이터 정합성을 검증할 수 있게 합니다.
+
+### 커버리지 검증 (루프)
+
+테스트 체크리스트 작성/갱신 후, 아래를 자체 검증한다:
+1. 해당 화면의 cases.md에 정의된 **모든 Case**가 테스트 데이터에 커버되는지 확인
+2. cases.md의 "공통 상태"(로딩, 빈, 에러)에 대한 테스트가 있는지 확인
+3. 누락된 케이스가 있으면 추가
+
+- **done-when**: cases.md 케이스 수 ≤ 테스트 케이스 수 (1:1 이상 매핑)
+- **fail-action**: 누락 케이스 발견 시 즉시 추가
 
 ## JS 데이터 파일 스키마
 

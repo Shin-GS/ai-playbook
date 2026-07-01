@@ -4,9 +4,9 @@ type: skill
 name: 프로젝트 기획 문서 구조
 description: 프로젝트 시작 시 갖춰야 할 기획 문서 4종의 구조와 권장 내용
 tags: [planning, documentation, project-setup]
-version: "1.2"
+version: "1.3"
 updatedAt: 2026-07-01
-changelog: 멀티 클라이언트 프로젝트 문서 분리 가이드 추가
+changelog: 문서 ↔ 코드 매핑 테이블 추가
 dependsOn: []
 compatibleWith: []
 ---
@@ -210,6 +210,33 @@ business-logic.md (도메인 규칙)
 ```
 
 glossary.md는 모든 문서에서 참조하는 공통 사전.
+
+---
+
+## 문서 ↔ 코드 매핑 (최신화 트리거)
+
+코드를 변경했을 때, 어떤 프로젝트 문서를 같이 갱신해야 하는지:
+
+| 코드 변경 | 갱신할 문서 |
+|-----------|-----------|
+| 새 API 엔드포인트 추가 | product.md (URL 구조), 해당 cases.md (API 연동 섹션) |
+| API 스펙 변경 (경로/파라미터/응답) | cases.md (API 연동), product.md (URL 구조 해당 시) |
+| DB 스키마 변경 (테이블/컬럼) | business-logic.md (도메인 모델), glossary.md (상태값) |
+| 새 패키지/모듈/디렉토리 추가 | structure.md (패키지 구조) |
+| 환경변수 추가/변경 | product.md (환경변수), .env.example |
+| 새 화면 추가 | glossary.md (화면 명칭), design-manifest.js, cases.md, HTML |
+| 화면 삭제 | glossary.md, design-manifest.js, README.md (design) |
+| 비즈니스 규칙 변경 | business-logic.md → cases.md → HTML → 코드 (전파 순서) |
+| 기술 스택 변경 (라이브러리 추가/버전 변경) | tech.md |
+| 빌드/배포 방식 변경 | product.md (빌드 & 실행) |
+| 상태값/Enum 추가/변경 | glossary.md (상태값 섹션) |
+| 인증/권한 방식 변경 | product.md, tech.md, business-logic.md |
+
+### 원칙
+
+- 코드 변경 시 위 테이블을 참조하여 **관련 문서도 함께 갱신**한다
+- 문서 갱신을 까먹으면 → 코드와 문서가 불일치 → AI가 다음에 잘못된 문서를 참조하여 오류 발생
+- **"코드는 바꿨는데 문서는 안 바꿈"이 가장 위험한 상태**
 
 ---
 

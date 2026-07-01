@@ -4,9 +4,9 @@ type: workflow
 name: 검증 루프
 description: 코드 변경 후 빌드→테스트→린트 검증 사이클과 실패 시 반복 전략
 tags: [workflow, verification, loop-control, harness]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-01
-changelog: 초기 버전
+changelog: 문서 동기화 확인 단계 추가
 dependsOn: []
 compatibleWith: []
 ---
@@ -24,6 +24,7 @@ compatibleWith: []
 3. **린트** — 코드 품질 규칙 위반 없음
 4. **테스트** — 관련 테스트 통과
 5. **보안 스캔** — (선택) 명백한 보안 이슈 없음
+6. **문서 동기화** — (선택) 코드 변경이 문서에 영향을 주는지 확인
 
 ## Steps
 
@@ -52,6 +53,13 @@ compatibleWith: []
 | 같은 에러 3회 반복 | 즉시 중단 + 사용자에게 보고 + 시도한 것/안 된 이유/대안 제시 |
 | 수정이 다른 단계를 깨뜨림 | 전체 검증 단계 처음부터 재실행 |
 | 5분 이상 같은 에러에 갇힘 | 중단 + 보고 |
+
+### Step 6: 문서 동기화 확인 (선택)
+- **done-when**: 코드 변경과 관련된 프로젝트 문서가 모두 최신 상태
+- **fail-action**: 갱신 필요한 문서 목록을 사용자에게 안내
+
+> 이 단계는 `project-docs-structure`의 "문서 ↔ 코드 매핑" 테이블을 기준으로 판단한다.
+> 내부 리팩토링 등 문서 영향 없는 변경이면 스킵.
 
 ## 검증 완료 보고
 
