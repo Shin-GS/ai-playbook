@@ -1,8 +1,10 @@
-# Temp files
+# 기존 프로젝트 참조 (추출 원본, 커밋 불필요)
 temp/
 
-# IntelliJ IDEA
-.idea/
-*.iml
-*.iws
-*.ipr
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+*.swp

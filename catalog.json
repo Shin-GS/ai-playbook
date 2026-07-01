@@ -1,0 +1,206 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-07-01",
+  "assets": [
+    {
+      "id": "backend-java-spring",
+      "type": "rule",
+      "name": "Backend Java Spring Boot 규칙",
+      "description": "Spring Boot + JPA 백엔드 프로젝트의 코딩 패턴과 규칙",
+      "tags": ["java", "spring-boot", "jpa", "backend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/backend-java-spring.md"
+    },
+    {
+      "id": "frontend-react",
+      "type": "rule",
+      "name": "Frontend React 규칙",
+      "description": "React + TypeScript + Tailwind 프론트엔드 프로젝트의 코딩 패턴과 규칙",
+      "tags": ["react", "typescript", "tailwind", "frontend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/frontend-react.md"
+    },
+    {
+      "id": "git-workflow",
+      "type": "rule",
+      "name": "Git 워크플로우 규칙",
+      "description": "안전한 Git 스테이징, 커밋, 메시지 작성 규칙",
+      "tags": ["git", "commit", "workflow"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/git-workflow.md"
+    },
+    {
+      "id": "dev-language",
+      "type": "rule",
+      "name": "개발 언어 및 소통 규칙",
+      "description": "에이전트 응답 언어, 코드 언어, 정확성 원칙, 변경 범위 제한 규칙",
+      "tags": ["language", "convention", "communication"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/dev-language.md"
+    },
+    {
+      "id": "nodejs-commonjs",
+      "type": "rule",
+      "name": "Node.js CommonJS 규칙",
+      "description": "Node.js CommonJS 프로젝트의 코딩 스타일, 에러 처리, 보안 규칙",
+      "tags": ["nodejs", "javascript", "commonjs", "backend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/nodejs-commonjs.md"
+    },
+    {
+      "id": "layered-architecture",
+      "type": "rule",
+      "name": "레이어드 아키텍처 규칙",
+      "description": "Controller→Service→Infra→Client 레이어 흐름 및 의존성 규칙",
+      "tags": ["architecture", "layered", "backend", "java"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/rules/layered-architecture.md"
+    },
+    {
+      "id": "subagents-collaboration",
+      "type": "workflow",
+      "name": "서브에이전트 협업 워크플로우",
+      "description": "서브에이전트 협업 순서와 역할 분담, 루프 제어 포함",
+      "tags": ["workflow", "subagents", "collaboration", "loop-control"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/workflows/subagents-collaboration.md"
+    },
+    {
+      "id": "context-efficiency",
+      "type": "workflow",
+      "name": "컨텍스트 효율 관리",
+      "description": "AI 컨텍스트 효율적 사용 규칙, 서브에이전트 호출 제어",
+      "tags": ["workflow", "context", "efficiency", "loop-control"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/workflows/context-efficiency.md"
+    },
+    {
+      "id": "dist-conversion-kiro",
+      "type": "workflow",
+      "name": "Kiro 변환 워크플로우",
+      "description": "source/에서 dist/kiro/로의 변환 절차와 매핑 규칙",
+      "tags": ["workflow", "conversion", "kiro", "dist"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/workflows/dist-conversion-kiro.md"
+    },
+    {
+      "id": "backend-developer",
+      "type": "agent",
+      "name": "Backend Developer",
+      "description": "Java + Spring Boot 기반 시니어 백엔드 개발자 에이전트",
+      "tags": ["java", "spring-boot", "backend", "developer"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/backend-developer.md"
+    },
+    {
+      "id": "backend-code-reviewer",
+      "type": "agent",
+      "name": "Backend Code Reviewer",
+      "description": "Java + Spring Boot 백엔드 코드 리뷰 전문 에이전트",
+      "tags": ["java", "spring-boot", "code-review", "backend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/backend-code-reviewer.md"
+    },
+    {
+      "id": "java-architect",
+      "type": "agent",
+      "name": "Java Architect",
+      "description": "Java 애플리케이션/서비스 아키텍처 설계 및 리뷰 전문 에이전트",
+      "tags": ["java", "architecture", "backend"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/java-architect.md"
+    },
+    {
+      "id": "frontend-developer",
+      "type": "agent",
+      "name": "Frontend Developer",
+      "description": "React + TypeScript 기반 시니어 프론트엔드 개발자 에이전트",
+      "tags": ["react", "typescript", "frontend", "developer"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/frontend-developer.md"
+    },
+    {
+      "id": "qa-tester",
+      "type": "agent",
+      "name": "QA Tester",
+      "description": "수동 테스트 체크리스트 생성 및 관리 에이전트",
+      "tags": ["qa", "testing", "checklist"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/qa-tester.md"
+    },
+    {
+      "id": "product-planner",
+      "type": "agent",
+      "name": "Product Planner",
+      "description": "기획 문서 관리 및 화면별 케이스 정의 에이전트",
+      "tags": ["planning", "product", "documentation"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/product-planner.md"
+    },
+    {
+      "id": "code-reviewer-nodejs",
+      "type": "agent",
+      "name": "Code Reviewer (Node.js)",
+      "description": "Node.js 프로젝트 코드 리뷰 전문 에이전트",
+      "tags": ["nodejs", "javascript", "code-review"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/code-reviewer-nodejs.md"
+    },
+    {
+      "id": "bug-investigator",
+      "type": "agent",
+      "name": "Bug Investigator",
+      "description": "로그 분석과 코드 추적으로 버그 원인을 찾고 수정 방향을 제안하는 에이전트",
+      "tags": ["debugging", "investigation", "bugfix"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/agents/bug-investigator.md"
+    },
+    {
+      "id": "block-git-commit",
+      "type": "automation",
+      "name": "Git Commit 차단",
+      "description": "AI의 자동 커밋을 방지하고, 사용자의 명시적 허용이 있을 때만 커밋 허용",
+      "tags": ["git", "safety", "commit"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/automations/block-git-commit.md"
+    },
+    {
+      "id": "block-env-read",
+      "type": "automation",
+      "name": ".env 파일 읽기 차단",
+      "description": ".env 파일 읽기를 차단하여 시크릿 키 노출 방지",
+      "tags": ["security", "env", "secrets"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/automations/block-env-read.md"
+    },
+    {
+      "id": "conventional-commit",
+      "type": "automation",
+      "name": "Conventional Commit 메시지 생성",
+      "description": "git staged 변경사항 분석하여 Conventional Commit 형식 커밋 메시지 자동 생성",
+      "tags": ["git", "commit", "automation"],
+      "version": "1.0",
+      "updatedAt": "2026-07-01",
+      "path": "source/automations/conventional-commit.md"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "name": "Version/UpdatedAt 체크",
+  "description": "source/ 파일 수정 시 version과 updatedAt 갱신 여부를 확인",
+  "version": "1.0.0",
+  "when": { "type": "fileEdited", "patterns": ["source/**/*.md"] },
+  "then": { "type": "askAgent", "prompt": "source/ 파일이 수정되었습니다. 해당 파일의 frontmatter에서 version과 updatedAt이 갱신되었는지 확인해주세요. 갱신되지 않았다면 적절히 증분해주세요. changelog도 업데이트가 필요합니다." }
+}

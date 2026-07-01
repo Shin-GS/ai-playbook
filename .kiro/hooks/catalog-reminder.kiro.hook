@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "name": "Catalog 갱신 리마인드",
+  "description": "source/ 파일 생성 시 catalog.json 갱신이 필요함을 알림",
+  "version": "1.0.0",
+  "when": { "type": "fileCreated", "patterns": ["source/**/*.md"] },
+  "then": { "type": "askAgent", "prompt": "source/ 디렉토리에 새 파일이 생성되었습니다. catalog.json에 이 자산을 등록해야 합니다. 파일의 frontmatter를 읽고 catalog.json의 assets 배열에 추가해주세요." }
+}
