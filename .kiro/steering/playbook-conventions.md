@@ -68,21 +68,15 @@ inclusion: always
 ### 새 자산 추가 시
 1. `source/{type_plural}/{id}.md` 생성 (위 frontmatter + 타입별 본문 구조)
 2. `catalog.json`에 엔트리 추가
-3. `dist/kiro/` 변환 생성 (dist-conversion-kiro 워크플로우 참조)
-4. `dist/kiro/manifest.json` 갱신
-5. 해당 프리셋에 포함 여부 판단 → `templates/presets/` 갱신
+3. 해당 프리셋에 포함 여부 판단 → `templates/presets/` 갱신
 
 ### 기존 자산 수정 시
 1. `source/{type_plural}/{id}.md` 수정
 2. frontmatter: version 증분 + updatedAt 갱신 + changelog 기록
 3. `catalog.json`의 해당 엔트리 version/updatedAt 갱신
-4. `dist/kiro/` 해당 파일 재변환
-5. `dist/kiro/manifest.json` updatedAt 갱신
 
 ### 자산 삭제 시
 1. `source/{type_plural}/{id}.md` 삭제
 2. `catalog.json`에서 해당 엔트리 제거
-3. `dist/kiro/` 해당 파일 삭제
-4. `dist/kiro/manifest.json`에서 제거
-5. `dependsOn`으로 참조하는 다른 자산 확인 → 의존성 제거/대체
-6. `templates/presets/`에서 해당 id 제거
+3. `dependsOn`으로 참조하는 다른 자산 확인 → 의존성 제거/대체
+4. `templates/presets/`에서 해당 id 제거

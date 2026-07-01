@@ -29,7 +29,7 @@
 - 그룹 단위 적용 (java-backend, react-frontend 등)
 
 ### 도구 확장
-- dist/ 폴더 역할 변경: "오프라인 패키지" 또는 폐기
+- dist/ 폴더 삭제 완료 (MCP 서버가 source/ 직접 서빙)
 - AI 도구가 source/를 읽고 자기 형식으로 변환하는 방식으로 전환
 - Claude Code: CLAUDE.md 변환 지원
 - Cursor: .cursorrules 변환 지원
