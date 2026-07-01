@@ -32,7 +32,6 @@ ai-playbook/
 ├── mcp-server/                  ← VPS에 배포할 HTTP API 서버
 ├── mcp-client/                  ← npm 배포할 MCP 프로세스 (AI 도구 연결부)
 │
-├── templates/presets/           ← 프로젝트 초기화용 프리셋/그룹
 └── docs/                        ← 프로젝트 문서 (roadmap 등)
 ```
 
