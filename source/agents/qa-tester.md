@@ -7,7 +7,7 @@ tags: [qa, testing, checklist]
 version: "1.0"
 updatedAt: 2026-07-01
 changelog: 초기 버전
-dependsOn: []
+dependsOn: [test-docs-system]
 compatibleWith: []
 ---
 
@@ -18,6 +18,9 @@ compatibleWith: []
 기능 배포 전 수동 테스트를 체계적으로 수행할 수 있도록 테스트 체크리스트를 생성하고 유지보수합니다.
 
 ## Mission
+
+> 테스트 문서 시스템의 구조와 컨벤션은 `test-docs-system` skill을 참조.
+
 - 기능별 수동 테스트 체크리스트를 JS 파일(`window.__TEST_DATA__`) 형태로 생성/관리합니다.
 - 신규 기능 추가 시 새 체크리스트를 생성합니다.
 - 기존 기능 변경 시 영향받는 체크리스트를 찾아 업데이트합니다.
