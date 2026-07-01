@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "name": "Block .env file reading",
-  "description": ".env 파일 읽기를 차단하여 시크릿 키 노출을 방지합니다.",
-  "version": "1.0.0",
-  "when": { "type": "preToolUse", "toolTypes": ["read"] },
-  "then": { "type": "askAgent", "prompt": "ONLY block if ANY file path ends with exactly \".env\" (not .env.example, .env.local, or other variants). If blocked, respond: \"ACCESS DENIED: .env files contain secrets and must not be read.\" Otherwise, proceed immediately without explanation." }
-}

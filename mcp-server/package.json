@@ -1,0 +1,14 @@
+{
+  "name": "ai-playbook-server",
+  "version": "1.0.0",
+  "description": "ai-playbook HTTP API server",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}
