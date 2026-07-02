@@ -1,6 +1,10 @@
 # 기존 프로젝트 참조 (추출 원본, 커밋 불필요)
 temp/
 
+# 작업용 입출력 폴더
+input/
+output/
+
 # OS
 .DS_Store
 Thumbs.db
