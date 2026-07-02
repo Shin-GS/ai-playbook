@@ -534,12 +534,12 @@
       "id": "image-generation",
       "type": "skill",
       "name": "이미지 생성 가이드",
-      "description": "외부 이미지 생성 API + 코드 후처리를 활용한 이미지/일러스트 생성 파이프라인",
+      "description": "외부 이미지 생성 API를 활용한 이미지/일러스트 생성 파이프라인 — 캐릭터 일관성 유지가 핵심",
       "tags": ["creative", "image", "illustration", "generation", "api"],
-      "version": "2.0",
+      "version": "3.0",
       "updatedAt": "2026-07-02",
       "path": "source/skills/creative/image-generation.md",
-      "changelog": "전면 재작성 — 외부 모델 API + 코드 후처리 하이브리드 방식으로 전환, 코드 단독 생성 방식 제거"
+      "changelog": "전면 리팩토링 — 중복 제거, 파이프라인/핵심 전제 현행화, 프롬프트 규칙 현실화, 프로바이더 표기 명확화"
     },
     {
       "id": "image-editing",
@@ -558,10 +558,10 @@
       "name": "만화 연재 시스템",
       "description": "만화 시리즈의 기획, 캐릭터/세계관 관리, 에피소드 제작, 스토리 일관성 유지를 위한 체계",
       "tags": ["creative", "comic", "manga", "webtoon", "series", "storytelling"],
-      "version": "1.8",
+      "version": "2.2",
       "updatedAt": "2026-07-02",
       "path": "source/skills/creative/comic-series.md",
-      "changelog": "스타일 참고 이미지 분석 워크플로우 추가 (유사 아티스트 추출, 선/색감 분석, art/tone 자동 매칭)"
+      "changelog": "이전 에피소드 참고 규칙 및 프롬프트 템플릿 활용 섹션 추가"
     }
   ],
   "groups": {

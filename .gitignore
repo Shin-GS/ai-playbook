@@ -5,6 +5,11 @@ temp/
 input/
 output/
 
+# Dependencies (테스트 과정 부산물)
+node_modules/
+package.json
+package-lock.json
+
 # OS
 .DS_Store
 Thumbs.db
