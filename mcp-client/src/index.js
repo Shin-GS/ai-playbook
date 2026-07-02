@@ -2,6 +2,7 @@
 
 const { Server } = require('@modelcontextprotocol/sdk/server/index.js');
 const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio.js');
+const { ListToolsRequestSchema, CallToolRequestSchema } = require('@modelcontextprotocol/sdk/types.js');
 
 const API_URL = process.env.PLAYBOOK_API_URL || 'http://localhost:3100';
 const API_KEY = process.env.PLAYBOOK_API_KEY || '';
@@ -27,7 +28,7 @@ const server = new Server(
 );
 
 // Tool: list_catalog
-server.setRequestHandler('tools/list', async () => ({
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     {
       name: 'list_catalog',
@@ -78,7 +79,7 @@ server.setRequestHandler('tools/list', async () => ({
 
 
 // Tool execution
-server.setRequestHandler('tools/call', async (request) => {
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
   try {

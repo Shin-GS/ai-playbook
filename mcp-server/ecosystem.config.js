@@ -6,7 +6,7 @@ module.exports = {
       cwd: __dirname,
       env: {
         PORT: 3100,
-        PLAYBOOK_API_KEY: ''  // VPS에서 직접 설정: pm2 set ai-playbook-server:PLAYBOOK_API_KEY "your-key"
+        PLAYBOOK_API_KEY: process.env.PLAYBOOK_API_KEY || ''
       },
       instances: 1,
       autorestart: true,

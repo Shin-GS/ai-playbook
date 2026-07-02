@@ -41,10 +41,10 @@
       "name": "개발 언어 및 소통 규칙",
       "description": "에이전트 응답 언어, 코드 언어, 정확성 원칙, 변경 범위 제한 규칙",
       "tags": ["language", "convention", "communication"],
-      "version": "1.0",
-      "updatedAt": "2026-07-01",
+      "version": "1.1",
+      "updatedAt": "2025-07-15",
       "path": "source/rules/dev-language.md",
-      "changelog": "초기 버전"
+      "changelog": "되묻기 원칙(상세) 섹션 추가, ask-before-assume 자산 참조 연결"
     },
     {
       "id": "nodejs-commonjs",
@@ -330,17 +330,6 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/marketing-strategist.md",
-      "changelog": "초기 버전"
-    },
-    {
-      "id": "frontend-code-reviewer",
-      "type": "agent",
-      "name": "Frontend Code Reviewer",
-      "description": "React + TypeScript 프론트엔드 코드 리뷰 전문 에이전트",
-      "tags": ["react", "typescript", "code-review", "frontend"],
-      "version": "1.0",
-      "updatedAt": "2026-07-01",
-      "path": "source/agents/frontend-code-reviewer.md",
       "changelog": "초기 버전"
     },
     {
