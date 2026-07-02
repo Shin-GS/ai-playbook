@@ -4,9 +4,9 @@ type: skill
 name: 만화 연재 시스템
 description: 만화 시리즈의 기획, 캐릭터/세계관 관리, 에피소드 제작, 스토리 일관성 유지를 위한 체계
 tags: [creative, comic, manga, webtoon, series, storytelling]
-version: "1.0"
+version: "1.1"
 updatedAt: 2026-07-02
-changelog: 초기 버전 — image-generation에서 분리
+changelog: 이미지 생성 도구 사전 확인 단계 추가 (Phase 3 진입 전 API 세팅 안내)
 activation: manual
 activationPattern: []
 dependsOn: [image-generation]
@@ -66,31 +66,69 @@ output/{시리즈명}/
 이미지 생성 API가 세팅되어 있지 않아요.
 만화의 실제 그림은 외부 이미지 생성 모델이 담당합니다.
 
-추천 옵션:
+아래 중 하나를 세팅해주세요:
 
-1. fal.ai (FLUX 모델 — 가장 저렴, LoRA 지원)
-   - 가입: https://fal.ai
-   - API 키 발급 후 .env에 FAL_KEY=xxx 추가
-   - 패널당 약 $0.015~0.03
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+방법 1: MCP 서버 연결 (권장 — Kiro에서 도구로 바로 사용)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-2. OpenAI GPT Image (참고 이미지 이해 우수)
-   - 가입: https://platform.openai.com
-   - API 키 발급 후 .env에 OPENAI_API_KEY=xxx 추가
-   - 패널당 약 $0.02~0.12
+.kiro/settings/mcp.json (또는 ~/.kiro/settings/mcp.json)에 추가:
 
-3. Stability AI (빠르고 안정적)
-   - 가입: https://platform.stability.ai
-   - API 키 발급 후 .env에 STABILITY_API_KEY=xxx 추가
-   - 패널당 약 $0.03~0.08
+{
+  "mcpServers": {
+    "image-gen": {
+      "command": "npx",
+      "args": ["-y", "openrouter-imgen-mcp"],
+      "env": {
+        "OPENROUTER_API_KEY": "${env:OPENROUTER_API_KEY}"
+      }
+    }
+  }
+}
+
+그리고 시스템 환경변수에 OPENROUTER_API_KEY를 설정하세요.
+(.env 파일에 직접 키를 적지 마세요 — 유출 위험)
+
+OpenRouter 가입: https://openrouter.ai
+API 키 발급: https://openrouter.ai/keys
+
+사용 가능한 모델: FLUX.2 Klein($0.014/장), FLUX.2 Pro($0.03/장),
+                  Nano Banana($0.039/장), GPT Image 1 Mini 등
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+방법 2: 코드에서 직접 API 호출
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MCP 없이도 AI가 스크립트를 작성해서 API를 직접 호출할 수 있습니다.
+
+1. 시스템 환경변수에 API 키 설정:
+   - Windows: setx OPENROUTER_API_KEY "sk-or-..."
+   - Mac/Linux: export OPENROUTER_API_KEY="sk-or-..."
+
+2. AI가 해당 환경변수를 참조하는 스크립트를 작성·실행합니다.
+   (키는 process.env에서 읽으므로 코드에 하드코딩되지 않음)
+
+⚠️ 보안 주의:
+- API 키를 .env 파일이나 코드에 직접 적지 마세요
+- 시스템 환경변수 또는 시크릿 매니저 사용
+- .gitignore에 .env가 포함되어 있는지 확인
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+선택지 요약
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+| 방법 | 장점 | 단점 |
+|------|------|------|
+| MCP (OpenRouter) | Kiro 도구로 바로 사용, 모델 선택 자유 | MCP 서버 설정 필요 |
+| MCP (fal.ai) | FLUX + LoRA 특화, 최저가 | fal.ai 가입 필요 |
+| 코드 직접 호출 | 설정 최소, 어디서든 동작 | 매번 스크립트 실행 |
 
 세팅 완료되면 series.md의 '이미지 생성 설정'에 사용할 모델을 기록합니다.
-
-지금 세팅할까요? 아니면 시리즈 기획/스토리까지만 먼저 진행할까요?
-(기획/스토리/지시서 작성은 이미지 생성 없이도 가능합니다)
 ```
 
 > 이미지 생성 도구 없이도 Phase 1~2 (셋업 + 스토리/지시서)는 진행 가능하다.
 > Phase 3 (이미지 생성) 시점에 도구가 없으면 다시 안내한다.
+> API 키는 반드시 환경변수로 관리하며, 코드나 파일에 직접 기록하지 않는다.
 
 ### AI가 물어볼 것
 
