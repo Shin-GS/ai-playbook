@@ -4,9 +4,9 @@ type: skill
 name: 만화 연재 시스템
 description: 만화 시리즈의 기획, 캐릭터/세계관 관리, 에피소드 제작, 스토리 일관성 유지를 위한 체계
 tags: [creative, comic, manga, webtoon, series, storytelling]
-version: "2.2"
+version: "2.3"
 updatedAt: 2026-07-02
-changelog: 이전 에피소드 참고 규칙 및 프롬프트 템플릿 활용 섹션 추가
+changelog: 패널 확정 후 이전 버전 파일 정리 절차 추가
 activation: manual
 activationPattern: []
 dependsOn: [image-generation]
@@ -527,6 +527,18 @@ series.md에 정의된 `prompt-prefix`와 `suffix`를 매 패널 프롬프트에
 - 다음 패널 생성 시, 직전 `panel-{NN}-final.png`를 참고 이미지에 포함
 - 첫 패널이거나, 이전 확정 패널이 없으면 이전 패널 ref는 생략
 - final 파일은 덮어쓰지 않음 (재확정 시 기존 final을 `final-old`로 백업)
+
+### 확정 후 버전 파일 정리
+
+패널이 확정되면, 해당 패널의 이전 버전 파일(v1, v2, ...)을 정리할지 사용자에게 확인한다:
+
+1. 확정 직후 사용자에게 질문: "panel-{NN}의 이전 버전(v1~v{N})을 삭제할까요?"
+2. 사용자가 삭제 OK → 해당 패널의 `-v{N}.png` 파일들 삭제, `-final.png`만 유지
+3. 사용자가 거절 → 그대로 유지 (나중에 참고할 수 있음)
+4. **자동 삭제 금지** — 반드시 사용자에게 되물을 것
+
+> 이유: 이전 버전을 나중에 비교하거나, 다른 에피소드에서 참고용으로 쓸 수 있음.
+> 반대로 파일이 쌓이면 디스크 용량과 혼란을 유발하므로 정리 기회를 제공.
 
 ### ⛔ API 호출 승인 규칙
 
