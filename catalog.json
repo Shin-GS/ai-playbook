@@ -558,10 +558,10 @@
       "name": "만화 연재 시스템",
       "description": "만화 시리즈의 기획, 캐릭터/세계관 관리, 에피소드 제작, 스토리 일관성 유지를 위한 체계",
       "tags": ["creative", "comic", "manga", "webtoon", "series", "storytelling"],
-      "version": "1.0",
+      "version": "1.6",
       "updatedAt": "2026-07-02",
       "path": "source/skills/creative/comic-series.md",
-      "changelog": "초기 버전 — image-generation에서 분리"
+      "changelog": "배경/소품/스타일(palette·effects·typography·camera) 문서 템플릿 상세 추가"
     }
   ],
   "groups": {
