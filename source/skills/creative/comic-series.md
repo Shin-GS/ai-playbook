@@ -4,9 +4,9 @@ type: skill
 name: 만화 연재 시스템
 description: 만화 시리즈의 기획, 캐릭터/세계관 관리, 에피소드 제작, 스토리 일관성 유지를 위한 체계
 tags: [creative, comic, manga, webtoon, series, storytelling]
-version: "1.6"
+version: "1.8"
 updatedAt: 2026-07-02
-changelog: 배경/소품/스타일(palette·effects·typography·camera) 문서 템플릿 상세 추가
+changelog: 스타일 참고 이미지 분석 워크플로우 추가 (유사 아티스트 추출, 선/색감 분석, art/tone 자동 매칭)
 activation: manual
 activationPattern: []
 dependsOn: [image-generation]
@@ -163,9 +163,29 @@ MCP 없이도 AI가 스크립트를 작성해서 API를 직접 호출할 수 있
 2. **타겟 플랫폼** (인스타, 웹툰, 유튜브 등)
 3. **기본 컷 구성** (4컷, 세로 스크롤, 자유 등)
 4. **그림체 참고 이미지** (있으면 첨부 요청)
-5. **톤/분위기** (코미디, 감성, 액션 등)
+5. **톤/분위기** (코미디, 감성, 액션 등) — 또는 프리셋 선택
 6. **주인공 정보** (이름, 종류, 성격, 참고 이미지)
 7. **작업 모드** (careful: 매 단계 확인 / fast: 스토리만 정하고 자동)
+
+### 스타일 참고 이미지 분석
+
+사용자가 그림체 참고 이미지를 제공하면, AI가 분석하여:
+
+1. 유사 아티스트/스튜디오 키워드 추출 (예: "Makoto Shinkai style", "Studio Ghibli aesthetic")
+2. 선 스타일 분석 (clean lines / sketchy / thick outlines 등)
+3. 색감 분석 (pastel / vivid / muted 등)
+4. art/tone 자동 매칭 제안
+
+분석 결과를 사용자에게 확인:
+```
+이 그림체를 분석하면:
+- 유사 아티스트: Makoto Shinkai (배경), KyoAni (캐릭터)
+- 선: clean lines, 얇은 외곽선
+- 색감: pastel, 따뜻한 톤
+- art: manga, tone: warm 으로 설정할게요. 맞나요?
+```
+
+승인 후 series.md의 `artist-keywords`에 기록.
 
 ### 생성되는 파일
 
@@ -191,6 +211,13 @@ MCP 없이도 AI가 스크립트를 작성해서 API를 직접 호출할 수 있
 - 그림체 참고: ./assets/style-ref.png
 - 연재 주기: (주 2회 / 미정)
 
+## 스타일 조합
+- art: (manga / ligne-claire / realistic / ink-brush / chalk)
+- tone: (warm / neutral / dramatic / romantic / energetic / vintage / action)
+- layout: (standard / cinematic / dense / splash / mixed / webtoon)
+- preset: (있으면 — daily-comedy, action-shonen 등)
+- artist-keywords: (스타일 참고 이미지 분석 결과. 예: "Makoto Shinkai, clean lines, pastel")
+
 ## 이미지 생성 설정
 - 모델: (FLUX Klein + LoRA / GPT Image 1 Mini / ...)
 - LoRA: (사용할 LoRA 이름, 있으면)
@@ -208,6 +235,42 @@ MCP 없이도 AI가 스크립트를 작성해서 API를 직접 호출할 수 있
 ## 예외
 - 사용자가 대화에서 명시적으로 다른 설정을 요청하면 그것을 우선함
 ```
+
+### Art × Tone × Layout 조합
+
+| 차원 | 옵션 | 설명 |
+|------|------|------|
+| art | manga | 큰 눈, 만화 표현, 감정 풍부 |
+| art | ligne-claire | 균일한 선, 플랫 컬러, 유럽 만화풍 (Tintin 등) |
+| art | realistic | 디지털 페인팅, 사실적 비율 |
+| art | ink-brush | 붓 터치, 수묵화 느낌 |
+| art | chalk | 칠판 느낌, 손그림 따뜻함 |
+| tone | warm | 향수, 따뜻함, 편안함 |
+| tone | neutral | 균형, 교육적 |
+| tone | dramatic | 강한 대비, 긴장감 |
+| tone | romantic | 부드러움, 장식적 |
+| tone | energetic | 밝고 역동적 |
+| tone | vintage | 레트로, 시대감 |
+| tone | action | 효과선, 임팩트 |
+| layout | standard | 4~6컷, 균형 배치 — 일반 대화/내러티브 |
+| layout | cinematic | 2~3컷, 큰 패널 — 드라마틱 장면 |
+| layout | dense | 6~9컷, 작은 패널 — 빠른 전개, 기술 설명 |
+| layout | splash | 1컷 풀페이지 — 핵심 순간, 반전 |
+| layout | mixed | 3~7컷 다양한 크기 — 복잡한 내러티브 |
+| layout | webtoon | 3~5컷 세로 — 모바일 읽기 최적화 |
+
+### 장르 프리셋
+
+| 프리셋 | art | tone | layout | 특수 규칙 |
+|--------|-----|------|--------|-----------|
+| daily-comedy | manga | warm | standard | 4컷 기본, 마지막 컷 반전/펀치라인 |
+| action-shonen | manga | action | cinematic | 효과선 필수, 액션 강조, 임팩트 |
+| healing-slice | ligne-claire | warm | standard | 여백 넉넉히, 풍경 강조, 느린 호흡 |
+| dramatic-seinen | realistic | dramatic | mixed | 강한 명암, 심리 묘사, 클로즈업 많이 |
+| edu-explainer | ligne-claire | neutral | dense | 정보 전달 중심, 다이어그램 활용 |
+
+사용자가 시리즈 셋업 시 프리셋을 선택하면 art/tone/layout이 자동 채워짐.
+개별 값을 오버라이드할 수도 있음 (예: preset: daily-comedy + layout: cinematic).
 
 ---
 
@@ -623,17 +686,19 @@ MCP 없이도 AI가 스크립트를 작성해서 API를 직접 호출할 수 있
 
 자주 사용하는 구도를 이름으로 정의:
 
-| 템플릿 | 구도 | 적합한 상황 |
-|--------|------|-------------|
-| establishing | 와이드, 캐릭터 작게, 장소 강조 | 장면 전환, 시작 |
-| talk-2char | 좌우 캐릭터, 위에 말풍선 | 대화 장면 |
-| talk-3char | 좌-중-우, 말풍선 위 | 3인 대화 |
-| reaction-solo | 클로즈업 1인, 배경 단색 | 리액션 컷 |
-| action | 동적 포즈, 효과선, 넓은 여백 | 행동/움직임 |
-| narration-end | 여백 많음, 나레이션 하단 | 마무리 |
-| montage | 3~4 작은 컷 조합 | 시간 경과 |
+| 템플릿 | 컷 수 | 구도 | 적합한 상황 |
+|--------|-------|------|-------------|
+| establishing | 1~2 | 와이드, 캐릭터 작게, 장소 강조 | 장면 전환, 시작 |
+| talk-2char | 1 | 좌우 캐릭터, 위에 말풍선 | 대화 장면 |
+| talk-3char | 1 | 좌-중-우, 말풍선 위 | 3인 대화 |
+| reaction-solo | 1 | 클로즈업 1인, 배경 단색/흐림 | 리액션 컷 |
+| action | 1~2 | 동적 포즈, 효과선, 넓은 여백 | 행동/움직임 |
+| narration-end | 1 | 여백 많음, 나레이션 하단 | 마무리 |
+| montage | 3~4 | 작은 컷 조합 | 시간 경과 |
+| splash | 1 | 풀 페이지, 최대 임팩트 | 핵심 순간, 반전 |
 
 지시서에서 사용: `template: talk-2char`
+layout과 조합: layout이 standard(4~6컷)이면 에피소드 내에서 위 템플릿을 조합하여 4~6패널 구성.
 
 ---
 
@@ -685,6 +750,24 @@ series.md에서 설정:
 | fast | 스토리 확정 후 나머지 자동 실행, 최종 결과만 확인 |
 
 사용자가 대화에서 "빠르게" 또는 "하나씩" 요청하면 해당 에피소드에서만 모드 오버라이드.
+
+### 부분 워크플로우
+
+에피소드 중간에 멈추거나, 특정 단계만 다시 실행할 수 있다:
+
+| 옵션 | 동작 |
+|------|------|
+| storyboard-only | 스토리/지시서까지만 작성, 이미지 생성 안 함 |
+| images-only | 이미 작성된 지시서 기반으로 이미지만 생성 |
+| regenerate {N} | 특정 패널만 재생성 (예: "패널 2, 4 다시") |
+| composite-only | 이미 생성된 패널 이미지로 후처리/합성만 |
+
+사용 예:
+```
+/만화 wfh-cat ep03 스토리만
+/만화 wfh-cat ep03 이미지만
+/만화 wfh-cat ep03 패널 2 다시
+```
 
 ---
 

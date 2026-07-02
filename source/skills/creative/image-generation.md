@@ -4,9 +4,9 @@ type: skill
 name: 이미지 생성 가이드
 description: 외부 이미지 생성 API + 코드 후처리를 활용한 이미지/일러스트 생성 파이프라인
 tags: [creative, image, illustration, generation, api]
-version: "2.0"
+version: "2.1"
 updatedAt: 2026-07-02
-changelog: 전면 재작성 — 외부 모델 API + 코드 후처리 하이브리드 방식으로 전환, 코드 단독 생성 방식 제거
+changelog: SLCT 프롬프트 규칙 강화 (아티스트 앞 배치, 60단어 제한, 스타일 분석), 프로바이더 자동 선택 추가
 activation: manual
 activationPattern: []
 dependsOn: []
@@ -102,15 +102,48 @@ compatibleWith: []
 - **S**ubject — 주체 (누가/무엇이, 어떤 포즈/행동)
 - **L**ighting — 조명/분위기 (시간대, 색조)
 - **C**amera — 카메라 각도/거리 (클로즈업, 와이드 등)
-- **T**echnical — 기술 세부사항 (스타일, 해상도, 종횡비)
+- **T**echnical — 기술 세부사항 (아티스트/스튜디오 키워드, 스타일, 해상도)
+
+### 프롬프트 규칙
+
+1. **T(Technical)를 프롬프트 맨 앞에 배치** — 스타일/아티스트 키워드가 앞에 있을수록 영향력이 강함
+2. **60단어 이내** — 프롬프트가 길면 모델이 일부를 무시하거나 혼동함. 핵심만 간결하게
+3. **아티스트 키워드는 구체적으로** — "anime style"보다 "Makoto Shinkai style, Your Name aesthetic"이 효과적
+
+### 프롬프트 구성 순서
+
+```
+[아티스트/스타일] + [주체/행동] + [조명/분위기] + [카메라] + [기술 사양]
 
 예시:
+"Makoto Shinkai style, clean lines, pastel — gray shorthair cat sitting at desk wearing headset, morning sunlight from window warm orange tone, medium shot slightly above eye level, 1024x1024"
 ```
-S: gray shorthair cat sitting at desk, wearing headset, front paw on keyboard
-L: morning sunlight from window, warm orange tone
-C: medium shot, slightly above eye level
-T: webtoon style, clean lines, pastel colors, 1024x1024
-```
+
+### 스타일 참고 이미지 분석
+
+사용자가 그림체 참고 이미지를 제공하면, AI가 분석하여 적절한 키워드를 추출:
+
+- 선 스타일 (clean lines / sketchy / thick outlines)
+- 색감 (pastel / vivid / muted / monochrome)
+- 유사 아티스트/스튜디오 (가장 가까운 스타일의 참고 아티스트)
+- 렌더링 방식 (flat color / cel-shading / watercolor / realistic)
+
+분석 결과를 series.md에 기록해두면 매 에피소드에서 동일 키워드를 재사용 가능.
+
+---
+
+## 프로바이더 자동 선택
+
+사용자가 모델을 지정하지 않았을 때:
+
+| 조건 | 우선 모델 | 이유 |
+|------|----------|------|
+| 캐릭터 참고 이미지 있음 | GPT Image, Google Gemini | 참고 이미지 이해 우수 |
+| LoRA 지정됨 | FLUX (fal.ai) | LoRA 지원 |
+| 참고 이미지 없음 + LoRA 없음 | 가장 저렴한 모델 | 비용 절약 |
+| 고퀄 요청 명시 | FLUX Pro / GPT Image 1 | 최고 품질 |
+
+series.md에 모델이 명시되어 있으면 그것을 우선 사용.
 
 ---
 
