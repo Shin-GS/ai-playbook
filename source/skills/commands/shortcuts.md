@@ -4,10 +4,10 @@ type: skill
 name: 명령어 단축키
 description: 자주 사용하는 워크플로우를 빠르게 트리거하는 명령어 정의
 tags: [commands, shortcuts, workflow, productivity]
-version: "1.3"
-updatedAt: 2026-07-01
-changelog: /만화, /사진편집 명령어 추가
-dependsOn: [subagents-collaboration, work-strategy, image-generation, image-editing]
+version: "1.5"
+updatedAt: 2026-07-02
+changelog: dependsOn에 comic-series 의존성 추가
+dependsOn: [subagents-collaboration, work-strategy, image-generation, image-editing, comic-series]
 compatibleWith: []
 ---
 
@@ -31,7 +31,7 @@ compatibleWith: []
 | `/리뷰` | 현재 변경사항 리뷰 | subagents-collaboration Phase 4 |
 | `/배포전` | 배포 전 종합 체크 | verification-loop + 문서 동기화 + QA |
 | `/영향분석 {설명}` | 영향 범위 분석 | subagents-collaboration Phase 0 |
-| `/만화 {설명}` | 만화/일러스트 생성 | image-generation |
+| `/만화 {설명}` | 만화/일러스트 생성 | comic-series + image-generation |
 | `/사진편집 {설명}` | 이미지 편집 | image-editing |
 
 ---
@@ -199,35 +199,36 @@ compatibleWith: []
 
 만화/일러스트 생성 파이프라인을 실행한다.
 
-> 이 명령 실행 시 `source/skills/creative/image-generation.md` 를 반드시 읽고 파이프라인을 따를 것.
+> 이 명령 실행 시 `source/skills/creative/comic-series.md` 와 `source/skills/creative/image-generation.md` 를 반드시 읽고 파이프라인을 따를 것.
 
 ### 동작 절차
 
-1. **확인**: 작업 전 확인 사항 (image-generation skill 기준)
-   - 타겟 플랫폼 → 사이즈 자동 결정
-   - 스타일 → 기존 style-guide.md 있으면 참조, 없으면 정의
-   - 캐릭터 → 기존 시트 있으면 참조, 없으면 생성
-   - 용도 → SNS? 앱? 마케팅?
+1. **시리즈 확인**: `input/{시리즈}/` 존재 여부 확인
+   - 없으면 → Phase 1 (시리즈 셋업) 시작
+   - 있으면 → series.md, story-bible.md, characters/ 읽기
 
-2. **문서 생성/확인**: world.md, style-guide.md, characters/ 참조 또는 생성
+2. **스토리 결정**: 사용자와 대화로 이번 에피소드 내용 확정
 
-3. **지시서 작성**: projects/{프로젝트}/brief.md 또는 ep{N}.md 생성
+3. **사전 검증**: story-bible 기반 설정 모순 체크
 
-4. **아스키 프로토타입**: 콘솔 스타일 아스키 아트로 레이아웃 시각화
-   - 사용자 확인 → 수정 → 반복
+4. **지시서 작성**: episodes/ep{N}/ep{N}.md 생성
 
-5. **코드 생성·실행**: 프로토타입 + 지시서 기반 이미지 코드 (SVG, Pillow, Sharp 등)
+5. **아스키 프로토타입**: 레이아웃 시각화 → 사용자 확인 (careful 모드 시)
 
-6. **검증**: 사이즈, 텍스트 잘림, 스타일 일관성 자동 체크
+6. **이미지 생성**: 패널별 API 호출 (등장 캐릭터 ref만 전송)
 
-7. **출력**: assets/output/ 에 저장
+7. **후처리**: 패널 합성, 말풍선/텍스트 오버레이
+
+8. **출력**: `output/{시리즈}/ep{N}/` 에 저장
+
+9. **story-bible 갱신 제안**
 
 ### 예시
 
 ```
 /만화 인스타그램용 4컷, 재택근무하는 고양이
-/만화 유튜브 썸네일, "오늘의 코딩 실수 TOP3"
-/만화 캐릭터 토리로 새 에피소드, 비 오는 날 카페
+/만화 wfh-cat 시리즈 ep05, 마루가 놀러오는 내용
+/만화 새 시리즈 만들고 싶어
 ```
 
 ---

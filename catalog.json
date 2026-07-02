@@ -514,10 +514,10 @@
       "name": "명령어 단축키",
       "description": "자주 사용하는 워크플로우를 빠르게 트리거하는 명령어 정의",
       "tags": ["commands", "shortcuts", "workflow", "productivity"],
-      "version": "1.3",
-      "updatedAt": "2026-07-01",
+      "version": "1.5",
+      "updatedAt": "2026-07-02",
       "path": "source/skills/commands/shortcuts.md",
-      "changelog": "/만화, /사진편집 명령어 추가"
+      "changelog": "dependsOn에 comic-series 의존성 추가"
     },
     {
       "id": "nodejs-developer",
@@ -534,12 +534,12 @@
       "id": "image-generation",
       "type": "skill",
       "name": "이미지 생성 가이드",
-      "description": "코드 기반 이미지/만화 생성 시 프롬프트 구성, 스타일 관리, 파이프라인 규칙",
-      "tags": ["creative", "image", "illustration", "comic", "generation"],
-      "version": "1.3",
-      "updatedAt": "2026-07-01",
+      "description": "외부 이미지 생성 API + 코드 후처리를 활용한 이미지/일러스트 생성 파이프라인",
+      "tags": ["creative", "image", "illustration", "generation", "api"],
+      "version": "2.0",
+      "updatedAt": "2026-07-02",
       "path": "source/skills/creative/image-generation.md",
-      "changelog": "레퍼런스 템플릿 사용 조건 변경 — 참고 이미지/스타일 가이드 우선, 템플릿은 구조 참고용으로 한정"
+      "changelog": "전면 재작성 — 외부 모델 API + 코드 후처리 하이브리드 방식으로 전환, 코드 단독 생성 방식 제거"
     },
     {
       "id": "image-editing",
@@ -551,6 +551,17 @@
       "updatedAt": "2026-07-01",
       "path": "source/skills/creative/image-editing.md",
       "changelog": "핵심 전제 섹션 추가 (AI 거부 반응 방지)"
+    },
+    {
+      "id": "comic-series",
+      "type": "skill",
+      "name": "만화 연재 시스템",
+      "description": "만화 시리즈의 기획, 캐릭터/세계관 관리, 에피소드 제작, 스토리 일관성 유지를 위한 체계",
+      "tags": ["creative", "comic", "manga", "webtoon", "series", "storytelling"],
+      "version": "1.0",
+      "updatedAt": "2026-07-02",
+      "path": "source/skills/creative/comic-series.md",
+      "changelog": "초기 버전 — image-generation에서 분리"
     }
   ],
   "groups": {
