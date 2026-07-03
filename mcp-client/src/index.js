@@ -332,8 +332,12 @@ async function handleCheckUpdates(args) {
 
   const catalog = await fetchApi('/api/catalog');
   const updates = [];
+  const disabledSet = new Set(playbook.disabled || []);
 
   for (const applied of playbook.applied) {
+    // disabled된 자산은 갱신 체크 건너뜀
+    if (disabledSet.has(applied.id)) continue;
+
     const catalogEntry = catalog.assets.find(a => a.id === applied.id);
     if (!catalogEntry) continue;
 
@@ -362,6 +366,22 @@ async function handleCheckUpdates(args) {
     }
   }
 
+  // defaults 새 자산 감지 (프로젝트에 미적용된 defaults)
+  const allDefaults = catalog.defaults || {};
+  const appliedIds = new Set((playbook.applied || []).map(a => a.id));
+  const newDefaults = [];
+
+  for (const [category, assetIds] of Object.entries(allDefaults)) {
+    for (const assetId of assetIds) {
+      if (!appliedIds.has(assetId) && !disabledSet.has(assetId)) {
+        const entry = catalog.assets.find(a => a.id === assetId);
+        if (entry) {
+          newDefaults.push({ id: assetId, name: entry.name, category, description: entry.description });
+        }
+      }
+    }
+  }
+
   return {
     content: [{
       type: 'text',
@@ -369,8 +389,11 @@ async function handleCheckUpdates(args) {
         status: 'checked',
         tool: playbook.tool,
         appliedCount: playbook.applied.length,
+        disabledCount: disabledSet.size,
         updatesAvailable: updates.length,
-        updates
+        updates,
+        newDefaultsAvailable: newDefaults.length,
+        newDefaults
       }, null, 2)
     }]
   };
@@ -546,6 +569,19 @@ ai-playbook MCP 서버 사용 중.
 이미 \`purpose\`가 있는 프로젝트에서 새로운 용도가 감지되면:
 - 해당 용도에 맞는 미적용 자산을 자연스럽게 제안
 - 승인 시 purpose 배열에 추가 + 새 프리셋 적용
+
+## 자산 비활성화 (disabled)
+
+사용자가 특정 자산을 끄고 싶을 때:
+- \`_playbook.json\`의 \`disabled\` 배열에 해당 자산 ID 추가
+- disabled된 자산은 갱신 체크 시 건너뜀
+- \`defaults.always\` 안전장치를 끄려 할 때 경고 필수
+
+## defaults 새 자산 전파
+
+catalog의 defaults에 새 자산이 추가된 경우:
+- 다음 세션에서 미적용 defaults 자산을 감지하여 제안
+- disabled에 있는 자산은 제안하지 않음
 `;
 }
 

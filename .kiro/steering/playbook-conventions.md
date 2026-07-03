@@ -27,6 +27,25 @@ catalog.json의 각 엔트리에는 위 frontmatter 필드 외에 추가로:
   - breaking: 기존 내용 변경/삭제 (사용자 확인 필수)
 - dependsOn: frontmatter의 dependsOn과 동일 (catalog에도 반영)
 
+## catalog.json 구조 섹션
+- `defaults`: 모든 프로젝트에 기본 적용할 자산 카테고리
+  - `always`: 어떤 프로젝트든 무조건 (안전장치 포함)
+  - `codeProjects`: 코드 작업 프로젝트에 추가
+  - `convenience`: 편의 자동화 (모든 프리셋에 포함하되 끄기 쉬움)
+- `presets`: 용도별 자산 조합
+- `groups`: 기술 스택별 자산 그룹
+
+## _playbook.json 스키마
+프로젝트 루트에 위치. 주요 필드:
+- tool: "kiro" | "claude-code"
+- purpose: 사용자가 답한 용도 배열
+- presets: 적용된 프리셋 ID 배열
+- applied: 적용된 자산 엔트리 배열 (id, version, contentHash 등)
+- disabled: 비활성화된 자산 ID 배열
+- declined: 제안 거절한 자산 ID 배열
+- pendingUpdates: 거절된 갱신 목록
+- history: 변경 이력
+
 ## 네이밍 규칙
 - id = 파일명 (확장자 제외)
 - 영문 소문자 + 하이픈만 사용

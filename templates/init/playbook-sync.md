@@ -92,3 +92,25 @@ ai-playbook MCP 서버 사용 중.
 - 사용자가 기존과 다른 작업을 언급 (예: 기존 "백엔드 개발" → "프론트도 추가할 거야")
 - 해당 용도에 맞는 미적용 자산을 자연스럽게 제안
 - 승인 시 purpose 배열에 추가 + 새 프리셋 적용
+
+## 자산 비활성화 (disabled)
+
+사용자가 특정 자산을 끄고 싶을 때:
+- `_playbook.json`의 `disabled` 배열에 해당 자산 ID 추가
+- disabled된 자산:
+  - Kiro hook: `"enabled": false`로 설정
+  - Kiro steering: 파일 유지하되, frontmatter에 `disabled: true` 추가
+  - 갱신 체크 시 건너뜀 (갱신 안내 안 함)
+  - 다시 켜려면 disabled에서 제거
+- `defaults.always`에 포함된 안전장치(block-git-commit, block-env-read)를 끄려 할 때:
+  - "⚠️ 이 자산은 안전장치입니다. 비활성화하면 {위험 설명}. 정말 끌까요?"
+  - 사용자가 명시적으로 확인해야 비활성화
+
+## defaults 새 자산 전파
+
+catalog의 defaults 카테고리에 새 자산이 추가된 경우:
+- 다음 세션의 갱신 체크 시, 프로젝트에 미적용된 defaults 자산을 감지
+- `defaults.always` 자산: "새 기본 규칙이 추가됐습니다: {name}. 적용할까요?"
+- `defaults.codeProjects` 자산: 코드 프로젝트에만 제안
+- `defaults.convenience` 자산: "새 편의 자동화가 추가됐습니다: {name}. 적용할까요? (편의용이라 안 해도 됩니다)"
+- disabled에 있는 자산은 제안하지 않음

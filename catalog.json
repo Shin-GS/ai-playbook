@@ -112,10 +112,10 @@
       "name": "자산 다운로드 절차",
       "description": "playbook 자산을 프로젝트에 다운로드할 때의 공통 절차 — 의존성 체크, 버전 관리, 갱신 정책",
       "tags": ["workflow", "download", "sync", "versioning"],
-      "version": "1.3",
+      "version": "1.4",
       "updatedAt": "2026-07-03",
       "path": "source/workflows/asset-download.md",
-      "changelog": "프리셋 기반 일괄 적용 섹션 추가 (키워드 매칭, defaults 카테고리, 복수 프리셋 지원)",
+      "changelog": "비활성화(disabled) 및 재활성화 절차 섹션 추가",
       "changeLevel": "minor",
       "dependsOn": []
     },
@@ -710,8 +710,9 @@
     }
   },
   "defaults": {
-    "always": ["dev-language", "ask-before-assume", "git-workflow", "commit-granularity", "scope-judgment", "block-git-commit"],
-    "codeProjects": ["security-coding", "code-reading-order", "verification-loop", "context-efficiency", "work-strategy", "block-env-read", "error-handling"]
+    "always": ["dev-language", "ask-before-assume", "git-workflow", "commit-granularity", "scope-judgment", "block-git-commit", "block-env-read"],
+    "codeProjects": ["security-coding", "code-reading-order", "verification-loop", "context-efficiency", "work-strategy", "error-handling"],
+    "convenience": ["conventional-commit", "lessons-learned"]
   },
   "presets": {
     "java-backend-dev": {
@@ -719,56 +720,56 @@
       "keywords": ["java", "spring", "백엔드", "서버", "API", "JPA", "maven", "gradle"],
       "groups": ["java-backend", "workflow-full"],
       "extras": ["testing-strategy", "naming-conventions"],
-      "includeDefaults": ["always", "codeProjects"]
+      "includeDefaults": ["always", "codeProjects", "convenience"]
     },
     "react-frontend-dev": {
       "description": "React/TypeScript 프론트엔드 개발",
       "keywords": ["react", "프론트엔드", "프론트", "웹앱", "SPA", "typescript", "tailwind"],
       "groups": ["react-frontend", "workflow-full"],
       "extras": ["testing-strategy"],
-      "includeDefaults": ["always", "codeProjects"]
+      "includeDefaults": ["always", "codeProjects", "convenience"]
     },
     "nodejs-backend-dev": {
       "description": "Node.js 백엔드 개발",
       "keywords": ["node", "nodejs", "express", "fastify", "koa", "서버"],
       "groups": ["nodejs-backend", "workflow-full"],
       "extras": ["testing-strategy", "naming-conventions"],
-      "includeDefaults": ["always", "codeProjects"]
+      "includeDefaults": ["always", "codeProjects", "convenience"]
     },
     "fullstack-dev": {
       "description": "풀스택 개발 (프론트 + 백엔드)",
       "keywords": ["풀스택", "fullstack", "프론트+백엔드", "웹 개발"],
       "groups": ["react-frontend", "nodejs-backend", "workflow-full"],
       "extras": ["testing-strategy", "naming-conventions"],
-      "includeDefaults": ["always", "codeProjects"]
+      "includeDefaults": ["always", "codeProjects", "convenience"]
     },
     "creative-comic": {
       "description": "만화/웹툰/일러스트 제작",
       "keywords": ["만화", "웹툰", "일러스트", "그리기", "comic", "manga", "webtoon"],
       "groups": ["creative"],
       "extras": [],
-      "includeDefaults": ["always"]
+      "includeDefaults": ["always", "convenience"]
     },
     "creative-image": {
       "description": "이미지/사진 편집",
       "keywords": ["사진", "이미지", "편집", "리사이즈", "보정", "photo"],
       "groups": [],
       "extras": ["image-editing", "shortcuts"],
-      "includeDefaults": ["always"]
+      "includeDefaults": ["always", "convenience"]
     },
     "planning-docs": {
       "description": "기획/문서 작업",
       "keywords": ["기획", "문서", "PRD", "요구사항", "planning"],
       "groups": ["project-setup"],
       "extras": ["product-planner", "planning-reviewer"],
-      "includeDefaults": ["always"]
+      "includeDefaults": ["always", "convenience"]
     },
     "operations": {
       "description": "서비스 운영/장애 대응",
       "keywords": ["운영", "장애", "모니터링", "배포", "ops", "devops"],
       "groups": [],
       "extras": ["incident-response", "backup-recovery", "voc-handling"],
-      "includeDefaults": ["always", "codeProjects"]
+      "includeDefaults": ["always", "codeProjects", "convenience"]
     }
   }
 }

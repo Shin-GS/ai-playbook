@@ -4,9 +4,9 @@ type: workflow
 name: 자산 다운로드 절차
 description: playbook 자산을 프로젝트에 다운로드할 때의 공통 절차 — 의존성 체크, 버전 관리, 갱신 정책
 tags: [workflow, download, sync, versioning]
-version: "1.3"
+version: "1.4"
 updatedAt: 2026-07-03
-changelog: 프리셋 기반 일괄 적용 섹션 추가 (키워드 매칭, defaults 카테고리, 복수 프리셋 지원)
+changelog: 비활성화(disabled) 및 재활성화 절차 섹션 추가
 activation: always
 activationPattern: []
 dependsOn: []
@@ -275,6 +275,35 @@ source 자산 (intent 선언)
 - 해당되는 프리셋 모두 적용
 - 자산 중복은 자동 제거
 - `_playbook.json`의 `presets` 배열에 모두 기록
+
+---
+
+## 비활성화 (disabled)
+
+적용된 자산을 삭제하지 않고 동작만 끌 때:
+
+### 절차
+
+1. `_playbook.json`의 `disabled` 배열에 자산 ID 추가
+2. 도구별 처리:
+   - **Kiro hook**: JSON에 `"enabled": false` 설정
+   - **Kiro steering**: frontmatter에 `disabled: true` 추가 (Kiro가 로드하지 않음)
+   - **Claude Code CLAUDE.md**: 해당 섹션을 주석 처리 (`<!-- disabled: {id} -->`)
+   - **Claude Code .claude/**: 파일명에 `.disabled` 접미사 추가
+3. `history`에 `"action": "disabled"` 기록
+
+### 안전장치 보호
+
+`defaults.always`에 포함된 자산(block-git-commit, block-env-read)을 비활성화하려 할 때:
+- 반드시 사용자에게 위험 고지: "⚠️ 이 자산은 안전장치입니다. 비활성화하면 {위험}. 정말 끌까요?"
+- 명시적 확인 없이 비활성화 금지
+- 확인 후 disabled 처리
+
+### 재활성화
+
+1. `disabled` 배열에서 해당 ID 제거
+2. 도구별 역처리 (enabled: true, disabled: true 제거 등)
+3. `history`에 `"action": "enabled"` 기록
 
 ---
 
