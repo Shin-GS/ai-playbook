@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "서버 명령 사전 체크",
+  "version": "1.0.0",
+  "description": "위험한 서버/인프라 명령 실행 전에 기존 환경 체크와 충돌 분석을 강제한다.",
+  "sourceId": "server-command-check",
+  "sourceVersion": "1.0",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [".*execute_pwsh.*", ".*control_pwsh.*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "shell 명령을 실행합니다. 아래 위험 키워드가 포함되어 있는지 확인하세요: apt install, apt remove, apt purge, yum install, rm -rf, rm -r, systemctl stop, systemctl disable, systemctl restart, docker rm, docker stop, docker compose down, docker system prune, iptables, ufw, chmod 777, chown -R, dd, mkfs, fdisk, kill -9, killall. 위험 키워드가 포함되어 있다면 server-safety 규칙에 따라: 1) 같은 역할 서비스가 이미 존재하는지 조회 명령으로 확인 2) 포트 충돌 체크 3) 위험도와 영향 범위를 사용자에게 보고 4) 사용자 승인 후 실행. 위험 키워드가 없으면 즉시 허용합니다."
+  }
+}

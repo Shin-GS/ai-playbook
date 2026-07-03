@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "updatedAt": "2026-07-03",
   "assets": [
     {
@@ -677,6 +677,32 @@
       "changelog": "패널 확정 후 이전 버전 파일 정리 절차 추가",
       "changeLevel": "minor",
       "dependsOn": ["image-generation"]
+    },
+    {
+      "id": "server-safety",
+      "type": "rule",
+      "name": "서버 작업 안전 규칙",
+      "description": "서버/인프라 명령 실행 전 위험도 분류, 사전 체크, 충돌 감지, 롤백 준비를 강제하는 규칙",
+      "tags": ["server", "safety", "infra", "operations", "linux"],
+      "version": "1.0",
+      "updatedAt": "2026-07-03",
+      "path": "source/rules/server-safety.md",
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
+    },
+    {
+      "id": "server-command-check",
+      "type": "automation",
+      "name": "서버 명령 사전 체크",
+      "description": "위험한 서버/인프라 명령 실행 전에 기존 환경 체크와 충돌 분석을 강제하는 자동화",
+      "tags": ["server", "safety", "infra", "automation", "shell"],
+      "version": "1.0",
+      "updatedAt": "2026-07-03",
+      "path": "source/automations/server-command-check.md",
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["server-safety"]
     }
   ],
   "groups": {
@@ -784,6 +810,13 @@
       "groups": [],
       "extras": ["incident-response", "backup-recovery", "voc-handling"],
       "includeDefaults": ["always", "codeProjects", "convenience"]
+    },
+    "infra-setup": {
+      "description": "서버/인프라 세팅 (VPS, Docker, CI/CD, 배포)",
+      "keywords": ["서버", "인프라", "VPS", "배포", "도커", "docker", "nginx", "CI/CD", "세팅", "설치", "리눅스", "linux", "ubuntu"],
+      "groups": [],
+      "extras": ["server-safety", "server-command-check", "backup-recovery"],
+      "includeDefaults": ["always", "convenience"]
     }
   }
 }
