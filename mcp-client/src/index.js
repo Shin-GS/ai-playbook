@@ -107,7 +107,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: 'init_project',
-      description: '프로젝트에 playbook 연동을 초기화한다. _playbook.json과 playbook-sync steering 파일을 생성하고, 기술 스택 기반으로 적합한 그룹을 추천한다. _playbook.json이 이미 존재하면 현재 상태를 반환한다.',
+      description: '프로젝트에 playbook 연동을 초기화한다. _playbook.json과 playbook-sync steering 파일을 생성하고, 사용자에게 물어볼 질문과 사용 가능한 프리셋 목록을 반환한다.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -115,6 +115,19 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           tool: { type: 'string', description: '사용 중인 AI 도구 (자동 감지 가능)', enum: ['kiro', 'claude-code'] }
         },
         required: ['project_root']
+      }
+    },
+    {
+      name: 'apply_preset',
+      description: '사용자의 용도에 맞는 프리셋을 적용한다. 프리셋에 정의된 defaults + groups + extras 자산 목록을 계산하여 반환한다. 실제 파일 다운로드는 에이전트가 load_asset으로 수행.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          project_root: { type: 'string', description: '프로젝트 루트 절대 경로' },
+          preset_ids: { type: 'array', items: { type: 'string' }, description: '적용할 프리셋 ID 목록 (여러 개 가능)' },
+          purpose: { type: 'array', items: { type: 'string' }, description: '사용자가 답변한 용도 (원문 그대로)' }
+        },
+        required: ['project_root', 'preset_ids']
       }
     },
     {
@@ -165,6 +178,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return await handleInitProject(args);
       }
 
+      case 'apply_preset': {
+        return await handleApplyPreset(args);
+      }
+
       case 'check_updates': {
         return await handleCheckUpdates(args);
       }
@@ -204,7 +221,8 @@ async function handleInitProject(args) {
             groups: Object.entries(catalog.groups || {}).map(([id, g]) => ({
               id, description: g.description, assetCount: g.assets.length
             }))
-          }
+          },
+          presets: catalog.presets || {}
         }, null, 2)
       }]
     };
@@ -216,6 +234,8 @@ async function handleInitProject(args) {
   // _playbook.json 생성
   const playbookData = {
     tool,
+    purpose: [],
+    presets: [],
     appliedGroups: [],
     applied: [],
     declined: [],
@@ -247,9 +267,17 @@ async function handleInitProject(args) {
 
   fs.writeFileSync(syncFilePath, syncContent, 'utf-8');
 
-  // catalog 요약 + 그룹 추천
+  // catalog 요약 + 스택 감지
   const catalog = await fetchApi('/api/catalog');
-  const recommendations = detectStackAndRecommend(projectRoot, catalog);
+  const stackDetection = detectStackAndRecommend(projectRoot, catalog);
+
+  // presets 목록 (사용자 선택용)
+  const presets = catalog.presets || {};
+  const presetList = Object.entries(presets).map(([id, p]) => ({
+    id,
+    description: p.description,
+    keywords: p.keywords
+  }));
 
   return {
     content: [{
@@ -261,14 +289,11 @@ async function handleInitProject(args) {
           playbookPath,
           syncFilePath
         ],
-        catalog_summary: {
-          assetCount: catalog.assets.length,
-          groupCount: Object.keys(catalog.groups || {}).length,
-          groups: Object.entries(catalog.groups || {}).map(([id, g]) => ({
-            id, description: g.description, assetCount: g.assets.length
-          }))
-        },
-        recommendations
+        detectedStack: stackDetection.detectedStack,
+        askUser: '이 프로젝트에서 주로 뭘 하시나요? (여러 개 가능. 예: 웹서버 개발, 만화 그리기, 사진 편집, 기획 문서 작성 등)',
+        availablePresets: presetList,
+        autoRecommendations: stackDetection.recommendedGroups,
+        nextStep: '사용자 답변을 받은 후 apply_preset을 호출하여 맞춤 자산을 적용하세요.'
       }, null, 2)
     }]
   };
@@ -352,6 +377,110 @@ async function handleCheckUpdates(args) {
 }
 
 /**
+ * apply_preset: 프리셋 기반으로 적용할 자산 목록 계산 + _playbook.json 갱신
+ */
+async function handleApplyPreset(args) {
+  const projectRoot = args.project_root;
+  const presetIds = args.preset_ids || [];
+  const purpose = args.purpose || [];
+
+  const playbookPath = path.join(projectRoot, '_playbook.json');
+  if (!fs.existsSync(playbookPath)) {
+    return { content: [{ type: 'text', text: 'Error: _playbook.json이 없습니다. init_project를 먼저 실행하세요.' }], isError: true };
+  }
+
+  const playbook = JSON.parse(fs.readFileSync(playbookPath, 'utf-8'));
+  const catalog = await fetchApi('/api/catalog');
+  const presets = catalog.presets || {};
+  const defaults = catalog.defaults || {};
+  const groups = catalog.groups || {};
+
+  // 적용할 자산 ID 수집 (중복 제거)
+  const assetIds = new Set();
+  const appliedPresetIds = [];
+
+  for (const presetId of presetIds) {
+    const preset = presets[presetId];
+    if (!preset) continue;
+
+    appliedPresetIds.push(presetId);
+
+    // defaults 포함
+    if (preset.includeDefaults) {
+      for (const defaultKey of preset.includeDefaults) {
+        const defaultAssets = defaults[defaultKey] || [];
+        defaultAssets.forEach(id => assetIds.add(id));
+      }
+    }
+
+    // groups 포함
+    if (preset.groups) {
+      for (const groupId of preset.groups) {
+        const group = groups[groupId];
+        if (group && group.assets) {
+          group.assets.forEach(id => assetIds.add(id));
+        }
+      }
+    }
+
+    // extras 포함
+    if (preset.extras) {
+      preset.extras.forEach(id => assetIds.add(id));
+    }
+  }
+
+  // 이미 적용된 자산 제외
+  const alreadyApplied = new Set((playbook.applied || []).map(a => a.id));
+  const toApply = [...assetIds].filter(id => !alreadyApplied.has(id));
+
+  // 자산 상세 정보 첨부
+  const toApplyDetails = toApply.map(id => {
+    const entry = catalog.assets.find(a => a.id === id);
+    return entry ? { id: entry.id, type: entry.type, name: entry.name, description: entry.description, dependsOn: entry.dependsOn } : { id };
+  });
+
+  // 의존성으로 인해 추가로 필요한 자산
+  const additionalDeps = new Set();
+  for (const asset of toApplyDetails) {
+    if (asset.dependsOn) {
+      for (const dep of asset.dependsOn) {
+        if (!assetIds.has(dep) && !alreadyApplied.has(dep)) {
+          additionalDeps.add(dep);
+        }
+      }
+    }
+  }
+
+  // _playbook.json 갱신 (purpose, presets 기록)
+  playbook.purpose = [...new Set([...(playbook.purpose || []), ...purpose])];
+  playbook.presets = [...new Set([...(playbook.presets || []), ...appliedPresetIds])];
+  playbook.history.push({
+    date: new Date().toISOString().split('T')[0],
+    action: 'preset_applied',
+    presets: appliedPresetIds,
+    purpose
+  });
+
+  fs.writeFileSync(playbookPath, JSON.stringify(playbook, null, 2) + '\n', 'utf-8');
+
+  return {
+    content: [{
+      type: 'text',
+      text: JSON.stringify({
+        status: 'preset_calculated',
+        appliedPresets: appliedPresetIds,
+        purpose: playbook.purpose,
+        assetsToApply: toApplyDetails,
+        additionalDependencies: [...additionalDeps],
+        alreadyAppliedCount: alreadyApplied.size,
+        totalNewAssets: toApply.length,
+        nextStep: '위 자산 목록을 사용자에게 보여주고, 승인받은 후 각 자산을 load_asset으로 다운로드하여 도구별 매핑에 따라 변환하세요.'
+      }, null, 2)
+    }]
+  };
+}
+
+/**
  * playbook-sync.md 내용 생성
  */
 function generateSyncContent() {
@@ -398,6 +527,25 @@ ai-playbook MCP 서버 사용 중.
 - 사용자의 작업 요청이 항상 최우선
 - 동기화 안내는 작업 완료 후 마지막에 짧게
 - breaking 갱신은 작업 시작 전에 안내 (구버전으로 작업하는 것 방지)
+
+## 초기 세팅 (처음 연결 시)
+
+\`_playbook.json\`이 없거나 \`purpose\`가 비어 있으면:
+
+1. 맥락이 충분한 경우 (이미 구체적 작업 요청이 온 경우):
+   - 스택 자동 감지 + 요청 내용에서 용도 추론 → 적합한 프리셋 자동 제안
+2. 맥락이 부족한 경우 (첫 세션, 일반적 인사 등):
+   - 사용자에게 질문: "이 프로젝트에서 주로 뭘 하시나요? (여러 개 가능)"
+   - 답변 기반으로 프리셋 매칭 → \`apply_preset\` 호출
+3. 프리셋 적용 후:
+   - defaults(always) 자산은 안내 없이 자동 적용
+   - 나머지는 목록 보여주고 승인 받기
+
+## 용도 변경/추가
+
+이미 \`purpose\`가 있는 프로젝트에서 새로운 용도가 감지되면:
+- 해당 용도에 맞는 미적용 자산을 자연스럽게 제안
+- 승인 시 purpose 배열에 추가 + 새 프리셋 적용
 `;
 }
 

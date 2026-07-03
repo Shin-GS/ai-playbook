@@ -4,9 +4,9 @@ type: workflow
 name: 자산 다운로드 절차
 description: playbook 자산을 프로젝트에 다운로드할 때의 공통 절차 — 의존성 체크, 버전 관리, 갱신 정책
 tags: [workflow, download, sync, versioning]
-version: "1.2"
+version: "1.3"
 updatedAt: 2026-07-03
-changelog: _playbook.json 위치 루트 고정 + contentHash 자동 감지 추가
+changelog: 프리셋 기반 일괄 적용 섹션 추가 (키워드 매칭, defaults 카테고리, 복수 프리셋 지원)
 activation: always
 activationPattern: []
 dependsOn: []
@@ -223,6 +223,58 @@ source 자산 (intent 선언)
 4. 사용자에게 목록 보여주고 확인
 5. 승인 시 순서대로 Step 2~4 실행
 6. `_playbook.json`의 `appliedGroups`에 그룹 ID 기록
+
+---
+
+## 프리셋 기반 일괄 적용
+
+사용자가 용도를 알려주면 프리셋으로 한 번에 세팅:
+
+### 절차
+
+1. `init_project` → 사용자에게 용도 질문
+2. 사용자 답변 → 키워드 매칭으로 프리셋 선택
+3. `apply_preset` 호출 → 적용할 자산 목록 계산
+4. 사용자에게 목록 보여주기:
+   - "다음 자산을 적용합니다: (목록). 진행할까요?"
+   - defaults(always)는 별도 승인 없이 포함됨을 안내
+5. 승인 시 → 각 자산을 `load_asset` + 도구별 매핑으로 다운로드
+6. `_playbook.json` 갱신 (purpose, presets, applied, history)
+
+### 프리셋 구조
+
+```json
+{
+  "java-backend-dev": {
+    "description": "Java/Spring 백엔드 개발",
+    "keywords": ["java", "spring", "백엔드", ...],
+    "groups": ["java-backend", "workflow-full"],
+    "extras": ["testing-strategy", "naming-conventions"],
+    "includeDefaults": ["always", "codeProjects"]
+  }
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| keywords | 사용자 답변에서 매칭할 키워드 |
+| groups | 포함할 그룹 (그룹 내 모든 자산 포함) |
+| extras | 그룹 외 추가 자산 |
+| includeDefaults | 적용할 defaults 카테고리 |
+
+### defaults 카테고리
+
+| 카테고리 | 자산 | 적용 조건 |
+|----------|------|-----------|
+| always | dev-language, ask-before-assume, git-workflow, commit-granularity, scope-judgment, block-git-commit | 모든 프로젝트 |
+| codeProjects | security-coding, code-reading-order, verification-loop, context-efficiency, work-strategy, block-env-read, error-handling | 코드 작업 있는 프로젝트 |
+
+### 복수 프리셋
+
+사용자가 "풀스택 + 만화" 처럼 여러 용도를 말하면:
+- 해당되는 프리셋 모두 적용
+- 자산 중복은 자동 제거
+- `_playbook.json`의 `presets` 배열에 모두 기록
 
 ---
 
