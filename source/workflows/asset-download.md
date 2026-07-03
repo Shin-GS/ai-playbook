@@ -4,9 +4,9 @@ type: workflow
 name: 자산 다운로드 절차
 description: playbook 자산을 프로젝트에 다운로드할 때의 공통 절차 — 의존성 체크, 버전 관리, 갱신 정책
 tags: [workflow, download, sync, versioning]
-version: "1.4"
+version: "1.5"
 updatedAt: 2026-07-03
-changelog: 비활성화(disabled) 및 재활성화 절차 섹션 추가
+changelog: 충돌 해결 정책을 3지선다(교체/diff 확인/건너뛰기)로 확장, 자동 머지 금지 원칙 추가
 activation: always
 activationPattern: []
 dependsOn: []
@@ -139,8 +139,14 @@ source 자산 (intent 선언)
 3. **해시 일치** → 사용자가 수정하지 않음 → changeLevel 정책대로 갱신
 4. **해시 불일치** → 사용자가 로컬에서 수정함 (customized) → 어떤 changeLevel이든 확인 필요:
    - "로컬에서 수정된 파일입니다. 갱신하면 커스텀 내용이 덮어씌워집니다. 진행할까요?"
-   - 승인 시 → 갱신 + contentHash 새로 계산
-   - 거절 시 → 건너뛰기 (pendingUpdates에 기록)
+   - 선택지 제공:
+     - **a) 서버 버전으로 교체** → 덮어쓰기 + contentHash 새로 계산 (로컬 수정 유실)
+     - **b) 로컬 유지 + 서버 변경사항 확인** → 서버의 changelog/diff 보여주기, 사용자가 수동 머지 판단
+     - **c) 건너뛰기** → pendingUpdates에 기록, 다음 세션에 다시 안내하지 않음
+   - 기본 추천: changeLevel이 breaking이면 b, 아니면 c
+
+> 자동 머지는 하지 않는다 — 마크다운 자산은 구조가 자유형이라 자동 머지가 위험함.
+> 대신 "서버에서 이런 게 바뀌었는데, 로컬에 반영할 부분이 있나요?" 식으로 안내.
 
 > 해시 계산 대상: 로컬 파일 전체 내용 (frontmatter 포함).
 > 줄바꿈은 LF로 정규화 후 해시 계산 (OS별 차이 방지).
@@ -181,9 +187,11 @@ source 자산 (intent 선언)
    - **minor**: "v1.0→v1.1: {changelog}. 갱신합니다 (취소하려면 말씀하세요)"
    - **breaking**: "v1.0→v2.0 (⚠️ breaking): {changelog}. 갱신할까요?" → 명시적 승인 필요
 5. 로컬 파일 해시 ≠ contentHash인 자산 (customized): 어떤 changeLevel이든 사용자 확인 필수
-   - "로컬에서 수정된 파일입니다. 갱신하면 커스텀 내용이 덮어씌워집니다. 진행할까요?"
-   - 승인 시 → 갱신 + contentHash 새로 계산
-   - 거절 시 → 건너뛰기 (pendingUpdates에 기록)
+   - "로컬에서 수정된 파일입니다. 서버에서 v{old}→v{new} 업데이트가 있습니다."
+   - 선택지: a) 서버 버전으로 교체 / b) 서버 변경사항만 확인 (수동 머지) / c) 건너뛰기
+   - 승인(a) 시 → 갱신 + contentHash 새로 계산
+   - 수동 머지(b) 시 → 서버 changelog + 변경 내용 보여주기, 사용자가 직접 판단
+   - 거절(c) 시 → 건너뛰기 (pendingUpdates에 기록)
 
 ### pendingUpdates
 

@@ -382,6 +382,32 @@ async function handleCheckUpdates(args) {
     }
   }
 
+  // 그룹 변경 감지 (적용된 그룹의 version 비교)
+  const groupUpdates = [];
+  const appliedGroups = playbook.appliedGroups || [];
+  const catalogGroups = catalog.groups || {};
+
+  for (const groupId of appliedGroups) {
+    const group = catalogGroups[groupId];
+    if (!group || !group.version) continue;
+
+    // _playbook.json에 그룹 적용 시점의 version을 기록해야 비교 가능
+    // appliedGroups가 단순 ID 배열이면 version 비교 불가 → 새 자산 유무로 판별
+    const groupAssets = group.assets || [];
+    const newInGroup = groupAssets.filter(id => !appliedIds.has(id) && !disabledSet.has(id));
+    if (newInGroup.length > 0) {
+      groupUpdates.push({
+        groupId,
+        groupVersion: group.version,
+        changelog: group.changelog,
+        newAssets: newInGroup.map(id => {
+          const entry = catalog.assets.find(a => a.id === id);
+          return entry ? { id, name: entry.name, type: entry.type } : { id };
+        })
+      });
+    }
+  }
+
   return {
     content: [{
       type: 'text',
@@ -393,7 +419,9 @@ async function handleCheckUpdates(args) {
         updatesAvailable: updates.length,
         updates,
         newDefaultsAvailable: newDefaults.length,
-        newDefaults
+        newDefaults,
+        groupUpdatesAvailable: groupUpdates.length,
+        groupUpdates
       }, null, 2)
     }]
   };

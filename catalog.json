@@ -681,32 +681,46 @@
   ],
   "groups": {
     "java-backend": {
+      "version": "1.0",
       "description": "Java/Spring 백엔드 개발 세트",
-      "assets": ["backend-java-spring", "layered-architecture", "naming-conventions", "security-coding", "backend-developer", "backend-code-reviewer", "java-architect"]
+      "assets": ["backend-java-spring", "layered-architecture", "naming-conventions", "security-coding", "backend-developer", "backend-code-reviewer", "java-architect"],
+      "changelog": "초기 버전"
     },
     "react-frontend": {
+      "version": "1.0",
       "description": "React/TypeScript 프론트엔드 개발 세트",
-      "assets": ["frontend-react", "naming-conventions", "security-coding", "frontend-developer", "frontend-code-reviewer"]
+      "assets": ["frontend-react", "naming-conventions", "security-coding", "frontend-developer", "frontend-code-reviewer"],
+      "changelog": "초기 버전"
     },
     "nodejs-backend": {
+      "version": "1.0",
       "description": "Node.js 백엔드 개발 세트",
-      "assets": ["nodejs-commonjs", "naming-conventions", "security-coding", "nodejs-developer", "code-reviewer-nodejs"]
+      "assets": ["nodejs-commonjs", "naming-conventions", "security-coding", "nodejs-developer", "code-reviewer-nodejs"],
+      "changelog": "초기 버전"
     },
     "project-setup": {
+      "version": "1.0",
       "description": "프로젝트 초기 세팅 (문서 + 디자인 + 테스트 시스템)",
-      "assets": ["project-docs-structure", "design-docs-system", "test-docs-system", "design-system"]
+      "assets": ["project-docs-structure", "design-docs-system", "test-docs-system", "design-system"],
+      "changelog": "초기 버전"
     },
     "common-rules": {
+      "version": "1.1",
       "description": "모든 프로젝트에 공통 적용할 규칙",
-      "assets": ["dev-language", "git-workflow", "commit-granularity", "ask-before-assume", "scope-judgment", "work-strategy", "security-coding", "naming-conventions"]
+      "assets": ["dev-language", "git-workflow", "commit-granularity", "ask-before-assume", "scope-judgment", "work-strategy", "security-coding", "naming-conventions"],
+      "changelog": "defaults로 이동된 자산 정리"
     },
     "workflow-full": {
+      "version": "1.0",
       "description": "서브에이전트 협업 + 검증 + 다관점 심의 전체 세트",
-      "assets": ["subagents-collaboration", "verification-loop", "multi-perspective-review", "context-efficiency"]
+      "assets": ["subagents-collaboration", "verification-loop", "multi-perspective-review", "context-efficiency"],
+      "changelog": "초기 버전"
     },
     "creative": {
+      "version": "1.0",
       "description": "이미지 생성 + 편집 + 만화 연재 세트",
-      "assets": ["image-generation", "image-editing", "comic-series", "shortcuts"]
+      "assets": ["image-generation", "image-editing", "comic-series", "shortcuts"],
+      "changelog": "초기 버전"
     }
   },
   "defaults": {
