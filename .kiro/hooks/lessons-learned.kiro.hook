@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "name": "패턴 축적 제안",
+  "version": "1.0.0",
+  "description": "세션 완료 시, 이번 작업에서 playbook에 추가할 만한 패턴이 있으면 제안한다.",
+  "sourceId": "lessons-learned",
+  "sourceVersion": "1.0",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "이번 세션을 돌아보세요. 다음에 해당하는 패턴이 있었나요? 1) 새로 발견한 문제 해결 패턴 2) 반복될 가능성이 있는 실수 3) 유용한 도구/라이브러리 사용법. 해당 사항이 있으면 '이번 작업에서 {패턴 요약}을 발견했습니다. ai-playbook에 추가할까요?' 한 줄로 제안하세요. 해당 사항이 없으면 아무 말 하지 마세요."
+  }
+}

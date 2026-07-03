@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "name": "Conventional Commit 메시지 생성",
+  "version": "1.0.0",
+  "description": "사용자가 수동 트리거 시, staged 변경사항을 분석하여 Conventional Commit 형식 커밋 메시지를 생성한다.",
+  "sourceId": "conventional-commit",
+  "sourceVersion": "1.0",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "git diff --cached --stat으로 staged 변경 파일 목록을 확인하고, git diff --cached로 상세 변경 내용을 분석하세요. staged 변경사항이 없으면 사용자에게 안내하세요. 있으면 Conventional Commit 형식으로 커밋 메시지를 작성하세요: '<type>: <subject(한국어, 50자 이내)>' + body에 변경사항 목록. type은 feat/fix/refactor/chore/docs/test/style/perf 중 선택. 여러 type에 걸치면 가장 핵심적인 것을 선택. 사용자에게 메시지를 보여주고 리뷰 후 긍정 답변이 있어야 커밋을 실행하세요."
+  }
+}

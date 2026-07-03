@@ -12,6 +12,8 @@ inclusion: always
 ## 규칙
 #[[file:source/rules/git-workflow.md]]
 #[[file:source/rules/dev-language.md]]
+#[[file:source/rules/ask-before-assume.md]]
+#[[file:source/rules/scope-judgment.md]]
 
 ## 변환 절차
 #[[file:source/workflows/asset-download.md]]

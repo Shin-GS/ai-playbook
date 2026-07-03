@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": ".env 파일 읽기 차단",
+  "version": "1.0.0",
+  "description": ".env 파일 읽기를 차단하여 시크릿 키 노출 방지. .env.example 등은 허용.",
+  "sourceId": "block-env-read",
+  "sourceVersion": "1.0",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["read"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "파일을 읽으려 합니다. 파일 경로가 정확히 '.env'로 끝나는 경우(예: .env, src/.env) 'ACCESS DENIED: .env files contain secrets and must not be read.'로 응답하세요. 다만 .env.example, .env.local, .env.development, .env.production 등 '.env.{suffix}' 형태는 템플릿이므로 허용합니다. .env가 아닌 파일이면 아무 제한 없이 허용합니다."
+  }
+}
