@@ -1,6 +1,6 @@
 {
   "name": "ai-playbook-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP client for ai-playbook — connects AI coding tools to your playbook assets",
   "main": "src/index.js",
   "bin": {
