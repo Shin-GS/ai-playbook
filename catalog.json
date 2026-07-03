@@ -684,10 +684,10 @@
       "name": "서버 작업 안전 규칙",
       "description": "서버/인프라 명령 실행 전 위험도 분류, 사전 체크, 충돌 감지, 롤백 준비를 강제하는 규칙",
       "tags": ["server", "safety", "infra", "operations", "linux"],
-      "version": "1.0",
+      "version": "1.1",
       "updatedAt": "2026-07-03",
       "path": "source/rules/server-safety.md",
-      "changelog": "초기 버전",
+      "changelog": "적용 범위 섹션 추가 — 명령 안내/직접 실행/스크립트 작성 모두 포함 명시",
       "changeLevel": "minor",
       "dependsOn": []
     },
