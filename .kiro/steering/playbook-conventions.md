@@ -16,6 +16,16 @@ inclusion: always
 - changelog: 최신 변경 요약
 - activation: always | fileMatch | manual (도구가 이 자산을 어떻게 활성화하는지)
 - activationPattern: 파일 패턴 배열 (activation이 fileMatch일 때만. 예: ["**/*.java", "**/*.kts"])
+- dependsOn: 이 자산이 의존하는 다른 자산 ID 배열 (없으면 빈 배열 [])
+- compatibleWith: 호환 기술 스택 배열 (없으면 빈 배열 [])
+
+## catalog.json 추가 필드
+catalog.json의 각 엔트리에는 위 frontmatter 필드 외에 추가로:
+- changeLevel: patch | minor | breaking (이번 버전 변경의 영향 수준)
+  - patch: 오타 수정, 문구 개선 (의미 변화 없음)
+  - minor: 규칙/내용 추가 (기존 내용 변경 없음)
+  - breaking: 기존 내용 변경/삭제 (사용자 확인 필수)
+- dependsOn: frontmatter의 dependsOn과 동일 (catalog에도 반영)
 
 ## 네이밍 규칙
 - id = 파일명 (확장자 제외)
@@ -26,9 +36,15 @@ inclusion: always
 - 내용 수정 시 version 증분 필수
 - updatedAt을 수정 날짜로 갱신 필수
 - changelog에 변경 사항 한 줄 기록
+- changeLevel 결정 기준:
+  - **patch**: 오타 수정, 문구 다듬기, 포맷 변경 (동작 영향 없음)
+  - **minor**: 규칙/단계/내용 추가, 예시 보강 (기존 것 변경 없음)
+  - **breaking**: 기존 규칙 삭제/수정, 구조 변경, 의존성 변경 (기존 사용자에 영향)
 
 ## catalog.json
 - source/ 파일 추가/수정 시 catalog.json도 함께 갱신
+- changeLevel은 "이번 변경"의 수준을 기록 (누적 아님, 최신 변경 기준)
+- dependsOn 변경 시 catalog.json도 반영 필수
 
 ---
 
@@ -67,13 +83,15 @@ inclusion: always
 
 ### 새 자산 추가 시
 1. `source/{type_plural}/{id}.md` 생성 (위 frontmatter + 타입별 본문 구조)
-2. `catalog.json`에 엔트리 추가
+2. `catalog.json`에 엔트리 추가 (dependsOn, changeLevel 포함)
 3. 해당 프리셋에 포함 여부 판단 → `templates/presets/` 갱신
+4. 의존성 확인: dependsOn에 넣은 자산이 실제 존재하는지 확인
 
 ### 기존 자산 수정 시
 1. `source/{type_plural}/{id}.md` 수정
 2. frontmatter: version 증분 + updatedAt 갱신 + changelog 기록
-3. `catalog.json`의 해당 엔트리 version/updatedAt 갱신
+3. `catalog.json`의 해당 엔트리 version/updatedAt/changelog/changeLevel 갱신
+4. dependsOn 변경 시 catalog.json도 반영
 
 ### 자산 삭제 시
 1. `source/{type_plural}/{id}.md` 삭제

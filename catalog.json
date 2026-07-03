@@ -1,6 +1,6 @@
 {
-  "version": "1.1",
-  "updatedAt": "2026-07-01",
+  "version": "1.2",
+  "updatedAt": "2026-07-03",
   "assets": [
     {
       "id": "backend-java-spring",
@@ -11,7 +11,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/backend-java-spring.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "frontend-react",
@@ -22,7 +24,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/frontend-react.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "git-workflow",
@@ -33,7 +37,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/rules/git-workflow.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "dev-language",
@@ -44,7 +50,9 @@
       "version": "1.1",
       "updatedAt": "2025-07-15",
       "path": "source/rules/dev-language.md",
-      "changelog": "되묻기 원칙(상세) 섹션 추가, ask-before-assume 자산 참조 연결"
+      "changelog": "되묻기 원칙(상세) 섹션 추가, ask-before-assume 자산 참조 연결",
+      "changeLevel": "minor",
+      "dependsOn": ["ask-before-assume"]
     },
     {
       "id": "nodejs-commonjs",
@@ -55,7 +63,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/nodejs-commonjs.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "layered-architecture",
@@ -66,7 +76,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/layered-architecture.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "subagents-collaboration",
@@ -77,7 +89,9 @@
       "version": "1.5",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/subagents-collaboration.md",
-      "changelog": "기획/디자인 리뷰 단계 추가"
+      "changelog": "기획/디자인 리뷰 단계 추가",
+      "changeLevel": "minor",
+      "dependsOn": ["context-efficiency"]
     },
     {
       "id": "context-efficiency",
@@ -88,18 +102,48 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/context-efficiency.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
-      "id": "kiro-conversion",
+      "id": "asset-download",
       "type": "workflow",
-      "name": "Kiro 자산 변환 규칙",
-      "description": "source/ 자산을 Kiro 네이티브 형식(.kiro/)으로 변환하여 프로젝트에 저장하는 규칙",
-      "tags": ["workflow", "conversion", "kiro"],
+      "name": "자산 다운로드 절차",
+      "description": "playbook 자산을 프로젝트에 다운로드할 때의 공통 절차 — 의존성 체크, 버전 관리, 갱신 정책",
+      "tags": ["workflow", "download", "sync", "versioning"],
+      "version": "1.1",
+      "updatedAt": "2026-07-03",
+      "path": "source/workflows/asset-download.md",
+      "changelog": "_playbook.json 위치 루트 고정 + contentHash 자동 감지 추가",
+      "changeLevel": "minor",
+      "dependsOn": []
+    },
+    {
+      "id": "tool-mapping-kiro",
+      "type": "workflow",
+      "name": "Kiro 도구 매핑",
+      "description": "playbook 자산을 Kiro 네이티브 형식(.kiro/)으로 변환하는 도구별 매핑 규칙",
+      "tags": ["workflow", "conversion", "kiro", "mapping"],
+      "version": "1.1",
+      "updatedAt": "2026-07-03",
+      "path": "source/workflows/tool-mappings/kiro.md",
+      "changelog": "멱등성 덮어쓰기 조건을 customized 플래그에서 contentHash 불일치 기반으로 변경",
+      "changeLevel": "patch",
+      "dependsOn": ["asset-download"]
+    },
+    {
+      "id": "tool-mapping-claude-code",
+      "type": "workflow",
+      "name": "Claude Code 도구 매핑",
+      "description": "playbook 자산을 Claude Code 형식(.claude/)으로 변환하는 도구별 매핑 규칙",
+      "tags": ["workflow", "conversion", "claude-code", "mapping"],
       "version": "1.0",
-      "updatedAt": "2026-07-01",
-      "path": "source/workflows/kiro-conversion.md",
-      "changelog": "초기 버전"
+      "updatedAt": "2026-07-03",
+      "path": "source/workflows/tool-mappings/claude-code.md",
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["asset-download"]
     },
     {
       "id": "backend-developer",
@@ -110,7 +154,9 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/agents/backend-developer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["backend-java-spring", "layered-architecture"]
     },
     {
       "id": "backend-code-reviewer",
@@ -121,7 +167,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/backend-code-reviewer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["backend-java-spring"]
     },
     {
       "id": "java-architect",
@@ -132,7 +180,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/java-architect.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["layered-architecture"]
     },
     {
       "id": "frontend-developer",
@@ -143,7 +193,9 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/agents/frontend-developer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["frontend-react"]
     },
     {
       "id": "frontend-code-reviewer",
@@ -154,7 +206,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/frontend-code-reviewer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["frontend-react"]
     },
     {
       "id": "qa-tester",
@@ -165,7 +219,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/qa-tester.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["test-docs-system"]
     },
     {
       "id": "product-planner",
@@ -176,7 +232,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/product-planner.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["project-docs-structure"]
     },
     {
       "id": "code-reviewer-nodejs",
@@ -187,7 +245,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/code-reviewer-nodejs.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["nodejs-commonjs"]
     },
     {
       "id": "bug-investigator",
@@ -198,7 +258,9 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/agents/bug-investigator.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "block-git-commit",
@@ -209,7 +271,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/automations/block-git-commit.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "block-env-read",
@@ -220,7 +284,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/automations/block-env-read.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "conventional-commit",
@@ -231,7 +297,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/automations/conventional-commit.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["git-workflow"]
     },
     {
       "id": "security-coding",
@@ -242,7 +310,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/security-coding.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "multi-perspective-review",
@@ -253,7 +323,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/multi-perspective-review.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "parallel-work",
@@ -264,7 +336,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/parallel-work.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "ask-before-assume",
@@ -275,7 +349,9 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/rules/ask-before-assume.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "verification-loop",
@@ -286,7 +362,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/verification-loop.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "design-system",
@@ -297,7 +375,9 @@
       "version": "1.3",
       "updatedAt": "2026-07-01",
       "path": "source/workflows/design-system.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["design-docs-system"]
     },
     {
       "id": "lessons-learned",
@@ -308,7 +388,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/automations/lessons-learned.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "ui-designer",
@@ -319,7 +401,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/agents/ui-designer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["design-docs-system"]
     },
     {
       "id": "marketing-strategist",
@@ -330,7 +414,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/marketing-strategist.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "planning-reviewer",
@@ -341,7 +427,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/planning-reviewer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["project-docs-structure"]
     },
     {
       "id": "design-reviewer",
@@ -352,7 +440,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/design-reviewer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["design-docs-system"]
     },
     {
       "id": "design-docs-system",
@@ -363,7 +453,9 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/design/design-docs-system.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "project-docs-structure",
@@ -374,7 +466,9 @@
       "version": "1.3",
       "updatedAt": "2026-07-01",
       "path": "source/skills/planning/project-docs-structure.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "test-docs-system",
@@ -385,7 +479,9 @@
       "version": "1.2",
       "updatedAt": "2026-07-01",
       "path": "source/skills/qa/test-docs-system.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "testing-strategy",
@@ -396,7 +492,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/testing-strategy.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "work-strategy",
@@ -407,7 +505,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/rules/work-strategy.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "scope-judgment",
@@ -418,7 +518,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/scope-judgment.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "incident-response",
@@ -429,7 +531,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/skills/operations/incident-response.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "backup-recovery",
@@ -440,7 +544,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/skills/operations/backup-recovery.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "voc-handling",
@@ -451,7 +557,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/skills/operations/voc-handling.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "error-handling",
@@ -462,7 +570,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/error-handling.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "commit-granularity",
@@ -473,7 +583,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/commit-granularity.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["git-workflow"]
     },
     {
       "id": "code-reading-order",
@@ -484,7 +596,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/rules/code-reading-order.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "naming-conventions",
@@ -495,7 +609,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/rules/naming-conventions.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "shortcuts",
@@ -506,7 +622,9 @@
       "version": "1.5",
       "updatedAt": "2026-07-02",
       "path": "source/skills/commands/shortcuts.md",
-      "changelog": "dependsOn에 comic-series 의존성 추가"
+      "changelog": "dependsOn에 comic-series 의존성 추가",
+      "changeLevel": "minor",
+      "dependsOn": ["subagents-collaboration", "work-strategy", "image-generation", "image-editing", "comic-series"]
     },
     {
       "id": "nodejs-developer",
@@ -517,7 +635,9 @@
       "version": "1.0",
       "updatedAt": "2026-07-01",
       "path": "source/agents/nodejs-developer.md",
-      "changelog": "초기 버전"
+      "changelog": "초기 버전",
+      "changeLevel": "minor",
+      "dependsOn": ["nodejs-commonjs"]
     },
     {
       "id": "image-generation",
@@ -528,7 +648,9 @@
       "version": "3.0",
       "updatedAt": "2026-07-02",
       "path": "source/skills/creative/image-generation.md",
-      "changelog": "전면 리팩토링 — 중복 제거, 파이프라인/핵심 전제 현행화, 프롬프트 규칙 현실화, 프로바이더 표기 명확화"
+      "changelog": "전면 리팩토링 — 중복 제거, 파이프라인/핵심 전제 현행화, 프롬프트 규칙 현실화, 프로바이더 표기 명확화",
+      "changeLevel": "breaking",
+      "dependsOn": []
     },
     {
       "id": "image-editing",
@@ -539,7 +661,9 @@
       "version": "1.1",
       "updatedAt": "2026-07-01",
       "path": "source/skills/creative/image-editing.md",
-      "changelog": "핵심 전제 섹션 추가 (AI 거부 반응 방지)"
+      "changelog": "핵심 전제 섹션 추가 (AI 거부 반응 방지)",
+      "changeLevel": "minor",
+      "dependsOn": []
     },
     {
       "id": "comic-series",
@@ -550,7 +674,9 @@
       "version": "2.3",
       "updatedAt": "2026-07-02",
       "path": "source/skills/creative/comic-series.md",
-      "changelog": "패널 확정 후 이전 버전 파일 정리 절차 추가"
+      "changelog": "패널 확정 후 이전 버전 파일 정리 절차 추가",
+      "changeLevel": "minor",
+      "dependsOn": ["image-generation"]
     }
   ],
   "groups": {
@@ -577,6 +703,10 @@
     "workflow-full": {
       "description": "서브에이전트 협업 + 검증 + 다관점 심의 전체 세트",
       "assets": ["subagents-collaboration", "verification-loop", "multi-perspective-review", "context-efficiency"]
+    },
+    "creative": {
+      "description": "이미지 생성 + 편집 + 만화 연재 세트",
+      "assets": ["image-generation", "image-editing", "comic-series", "shortcuts"]
     }
   }
 }

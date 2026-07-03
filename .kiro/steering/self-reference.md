@@ -14,7 +14,8 @@ inclusion: always
 #[[file:source/rules/dev-language.md]]
 
 ## 변환 절차
-#[[file:source/workflows/kiro-conversion.md]]
+#[[file:source/workflows/asset-download.md]]
+#[[file:source/workflows/tool-mappings/kiro.md]]
 
 ## 명령어
 #[[file:source/skills/commands/shortcuts.md]]

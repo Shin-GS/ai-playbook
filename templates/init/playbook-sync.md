@@ -63,7 +63,7 @@ ai-playbook MCP 서버 사용 중.
 | automation | CLAUDE.md 규칙 섹션 | 자연어 규칙 변환 |
 | skill | .claude/docs/{id}.md | 참조 문서 |
 
-> 상세 변환 규칙: `source/workflows/tool-mappings/{tool}.md` 참조
+> 상세 변환 규칙: playbook 서버의 tool-mappings 참조
 
 ## 우선순위
 - 사용자의 작업 요청이 항상 최우선
