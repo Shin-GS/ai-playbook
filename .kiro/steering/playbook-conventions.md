@@ -92,6 +92,16 @@ catalog.json의 각 엔트리에는 위 frontmatter 필드 외에 추가로:
 - Action: 행동 기술
 - Notes: 부가 설명
 
+### automation → hook 변환 시 주의
+
+- **toolTypes는 가능한 한 좁게 지정**:
+  - ❌ `["read"]` → 모든 읽기 도구(list_directory 포함)에 트리거됨
+  - ✅ `[".*read_file.*", ".*read_files.*"]` → 실제 파일 읽기만 트리거
+  - ❌ `["shell"]` → 모든 shell 도구에 트리거됨
+  - ✅ `[".*execute_pwsh.*", ".*control_pwsh.*"]` → 실제 명령 실행만 트리거
+- **이유**: 넓은 카테고리를 쓰면 무관한 도구 호출마다 hook이 발동하여 에이전트 턴이 낭비됨
+- **prompt 내 조건 분기도 명확히**: "해당 안 되면 즉시 허용" 문구를 넣어서 불필요한 처리 최소화
+
 ### skill (스킬/지식)
 - 자유 형식 (지식 문서라 구조 강제 불필요)
 - 참고 가능한 섹션 분리 권장

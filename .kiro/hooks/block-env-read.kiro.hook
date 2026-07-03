@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "name": ".env 파일 읽기 차단",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": ".env 파일 읽기를 차단하여 시크릿 키 노출 방지. .env.example 등은 허용.",
   "sourceId": "block-env-read",
   "sourceVersion": "1.0",
   "when": {
     "type": "preToolUse",
-    "toolTypes": ["read"]
+    "toolTypes": [".*read_file.*", ".*read_files.*", ".*read_code.*"]
   },
   "then": {
     "type": "askAgent",
