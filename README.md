@@ -42,20 +42,24 @@ ai-playbook/
 1. MCP 클라이언트 설치 (한번만):
 
 ```json
-// ~/.kiro/settings/mcp.json
+// ~/.kiro/settings/mcp.json (또는 .kiro/settings/mcp.json)
 {
   "mcpServers": {
     "ai-playbook": {
       "command": "npx",
       "args": ["ai-playbook-mcp"],
       "env": {
-        "PLAYBOOK_API_URL": "https://your-vps-domain.com/api",
-        "PLAYBOOK_API_KEY": "your-api-key"
-      }
+        "PLAYBOOK_API_URL": "https://playbook.cloudrudtjq1213.com",
+        "PLAYBOOK_API_KEY": "your-api-key",
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+      },
+      "autoApprove": ["list_catalog"]
     }
   }
 }
 ```
+
+> ⚠️ `NODE_TLS_REJECT_UNAUTHORIZED=0`은 Let's Encrypt 인증서 체인을 Node.js가 인식 못 하는 환경에서 필요. 개인 서버용이므로 보안상 문제 없음.
 
 2. 글로벌 steering 설치:
 

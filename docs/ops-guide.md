@@ -76,3 +76,5 @@ curl -H "Authorization: Bearer YOUR_API_KEY" https://playbook.cloudrudtjq1213.co
 | health check 실패 | 서버 미기동 | VPS에서 `pm2 restart ai-playbook-server` |
 | 502 Bad Gateway | PM2 프로세스 죽음 | `pm2 start ecosystem.config.js` |
 | SSL 인증서 만료 | NPM 자동갱신 실패 | NPM UI에서 인증서 재발급 |
+| MCP `fetch failed` (UNABLE_TO_GET_ISSUER_CERT_LOCALLY) | Node.js가 Let's Encrypt 인증서 체인 불신 | mcp.json env에 `"NODE_TLS_REJECT_UNAUTHORIZED": "0"` 추가 |
+| MCP 도구 호출 시 Unauthorized | API 키 누락/불일치 | mcp.json의 `PLAYBOOK_API_KEY` 확인 |
